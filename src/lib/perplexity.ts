@@ -8,16 +8,42 @@ export const models = {
 export type ModelType = keyof typeof models;
 
 class PerplexityClient {
-  private client: null = null;
+  private apiKey: string | undefined;
   private defaultModel: ModelType = 'sonar';
 
   constructor() {
-    // Initialize client as null since we're removing the Perplexity API integration
-    this.client = null;
+    this.apiKey = import.meta.env.VITE_PERPLEXITY_API_KEY;
   }
 
   async chat(message: string, model?: ModelType): Promise<string> {
-    return this.getFallbackResponse(message);
+    if (!this.apiKey) {
+      return this.getFallbackResponse(message);
+    }
+
+    try {
+      const response = await fetch('https://api.perplexity.ai/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`
+        },
+        body: JSON.stringify({
+          model: models[model || this.defaultModel],
+          messages: [{ role: 'user', content: message }]
+        })
+      });
+
+      if (!response.ok) {
+        console.error('Perplexity API error:', response.status);
+        return this.getFallbackResponse(message);
+      }
+
+      const data = await response.json();
+      return data.choices[0].message.content;
+    } catch (error) {
+      console.error('Error calling Perplexity API:', error);
+      return this.getFallbackResponse(message);
+    }
   }
 
   private getFallbackResponse(message: string): string {
@@ -33,7 +59,7 @@ class PerplexityClient {
   }
 
   isConfigured(): boolean {
-    return false;
+    return Boolean(this.apiKey);
   }
 }
 
