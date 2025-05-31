@@ -29,14 +29,14 @@ const Layout = () => {
         />
       </div>
       
-      {/* Sidebar with bright gradient */}
-      <div className="hidden md:block w-64 bg-gradient-to-br from-primary-400 to-accent-400 shadow-xl relative z-10">
+      {/* Sidebar with gradient background */}
+      <div className="hidden md:block w-64 bg-gradient-to-br from-white/80 via-primary-50/80 to-accent-50/80 backdrop-blur-md border-r border-white/20 shadow-lg relative z-10">
         <Sidebar />
       </div>
 
       <div className="flex-1 flex flex-col overflow-hidden relative z-10">
-        {/* Navbar with bright gradient */}
-        <div className="bg-gradient-to-r from-primary-400 to-accent-400 shadow-xl relative z-20">
+        {/* Navbar with gradient background */}
+        <div className="bg-gradient-to-r from-white/80 via-primary-50/80 to-accent-50/80 border-b border-white/20 shadow-lg backdrop-blur-md relative z-20">
           <Navbar />
         </div>
         
