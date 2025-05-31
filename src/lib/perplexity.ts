@@ -14,6 +14,12 @@ interface Message {
   content: string;
 }
 
+interface SearchResult {
+  title: string;
+  url: string;
+  date: string;
+}
+
 interface PerplexityResponse {
   id: string;
   choices: {
@@ -22,6 +28,16 @@ interface PerplexityResponse {
       role: string;
     };
   }[];
+  citations?: string[];
+  search_results?: SearchResult[];
+}
+
+interface FormattedResponse {
+  content: string;
+  citations?: Array<{
+    text: string;
+    url?: string;
+  }>;
 }
 
 export class PerplexityClient {
@@ -76,11 +92,36 @@ export class PerplexityClient {
       }
 
       const data: PerplexityResponse = await response.json();
-      return data.choices[0].message.content;
+      return this.formatResponse(data);
     } catch (error) {
       console.error('Perplexity API error:', error);
       return this.getFallbackResponse(userMessage);
     }
+  }
+
+  private formatResponse(response: PerplexityResponse): string {
+    let formattedText = response.choices[0].message.content;
+
+    // Add citations if available
+    if (response.citations?.length || response.search_results?.length) {
+      formattedText += '\n\nSources:\n';
+      
+      // Add direct citations
+      if (response.citations?.length) {
+        formattedText += response.citations
+          .map(citation => `• ${citation}`)
+          .join('\n');
+      }
+
+      // Add search results with clickable links
+      if (response.search_results?.length) {
+        formattedText += response.search_results
+          .map(result => `• [${result.title}](${result.url})${result.date ? ` (${result.date})` : ''}`)
+          .join('\n');
+      }
+    }
+
+    return formattedText;
   }
 
   isConfigured(): boolean {
@@ -99,7 +140,6 @@ export class PerplexityClient {
       "I hear you, and your feelings are valid. Would you like to talk more about it?"
     ];
     
-    // Simple selection based on message length to maintain some variety
     const index = message.length % responses.length;
     return responses[index];
   }
