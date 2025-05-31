@@ -9,37 +9,37 @@ interface ModelSelectorProps {
 }
 
 const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSelectorProps) => {
-  // First define the base model info for known models
-  const baseModelInfo: Record<ModelType, { name: string; description: string }> = {
-    mistral: {
-      name: 'Mistral-7B',
-      description: 'Fast and efficient for general conversations'
+  const modelInfo: Record<ModelType, { name: string; description: string; maxTokens: number }> = {
+    'sonar-deep-research': {
+      name: 'Sonar Deep Research',
+      description: 'Advanced research and analysis',
+      maxTokens: 128000
     },
-    codellama: {
-      name: 'CodeLlama-34B',
-      description: 'Specialized in technical discussions'
+    'sonar-reasoning-pro': {
+      name: 'Sonar Reasoning Pro',
+      description: 'Enhanced reasoning capabilities',
+      maxTokens: 128000
     },
-    mixtral: {
-      name: 'Mixtral-8x7B',
-      description: 'Advanced reasoning and comprehension'
+    'sonar-reasoning': {
+      name: 'Sonar Reasoning',
+      description: 'Balanced reasoning and response',
+      maxTokens: 128000
     },
-    sonar: {
-      name: 'Sonar Small',
-      description: 'Optimized for natural chat interactions'
+    'sonar-pro': {
+      name: 'Sonar Pro',
+      description: 'Professional-grade responses',
+      maxTokens: 200000
+    },
+    'sonar': {
+      name: 'Sonar',
+      description: 'Fast and efficient chat',
+      maxTokens: 128000
+    },
+    'r1-1776': {
+      name: 'R1-1776',
+      description: 'Specialized chat model',
+      maxTokens: 128000
     }
-  };
-
-  // Then create the final modelInfo by combining base info with any additional models
-  const modelInfo = {
-    ...baseModelInfo,
-    ...Object.fromEntries(
-      Object.keys(models)
-        .filter(key => !(key in baseModelInfo))
-        .map(key => [key, {
-          name: key.charAt(0).toUpperCase() + key.slice(1),
-          description: 'AI language model'
-        }])
-    )
   };
 
   return (
@@ -53,8 +53,8 @@ const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSele
         } rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50`}
       >
         {Object.entries(models).map(([key, value]) => (
-          <option key={key} value={key}>
-            {modelInfo[key as ModelType]?.name || key}
+          <option key={key} value={key} title={modelInfo[key as ModelType].description}>
+            {modelInfo[key as ModelType].name} ({modelInfo[key as ModelType].maxTokens / 1000}k tokens)
           </option>
         ))}
       </select>
