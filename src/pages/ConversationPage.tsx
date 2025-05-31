@@ -13,6 +13,7 @@ import {
   Brain
 } from 'lucide-react';
 import ModelSelector from '../components/conversation/ModelSelector';
+import MessageBubble from '../components/conversation/MessageBubble';
 import { perplexityClient, ModelType } from '../lib/perplexity';
 
 interface Message {
@@ -99,7 +100,7 @@ const ConversationPage = () => {
 
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col">
-      <div className="bg-white p-4 border-b border-neutral-200 flex justify-between items-center">
+      <header className="bg-white p-4 border-b border-neutral-200 flex justify-between items-center">
         <h1 className="text-xl font-semibold">Conversation</h1>
         <div className="flex items-center gap-3">
           <ModelSelector 
@@ -119,12 +120,16 @@ const ConversationPage = () => {
             <span className="text-sm">Help</span>
           </button>
         </div>
-      </div>
+      </header>
       
       <div className="flex-1 overflow-y-auto p-4 bg-neutral-50">
         <div className="max-w-3xl mx-auto space-y-4">
           {messages.map((message) => (
-            <MessageBubble key={message.id} message={message} isSpeaking={isSpeaking && message.id === messages[messages.length - 1].id} />
+            <MessageBubble 
+              key={message.id} 
+              message={message} 
+              isSpeaking={isSpeaking && message.id === messages[messages.length - 1].id} 
+            />
           ))}
           <div ref={messagesEndRef} />
         </div>
@@ -185,71 +190,6 @@ const ConversationPage = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-interface MessageBubbleProps {
-  message: Message;
-  isSpeaking: boolean;
-}
-
-const MessageBubble = ({ message, isSpeaking }: MessageBubbleProps) => {
-  const isAI = message.sender === 'ai';
-  
-  return (
-    <motion.div
-      className={`flex ${isAI ? 'justify-start' : 'justify-end'}`}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className={`max-w-[80%] rounded-2xl p-4 ${
-        isAI 
-          ? 'bg-white border border-neutral-200 text-neutral-900' 
-          : 'bg-primary-500 text-white'
-      }`}>
-        <div className="flex items-start gap-3">
-          {isAI && (
-            <div className="relative flex-shrink-0 mt-1">
-              <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
-                <Heart className="h-5 w-5 text-primary-500" />
-              </div>
-              {isSpeaking && (
-                <div className="absolute -right-1 -bottom-1 flex space-x-0.5">
-                  <motion.div 
-                    className="w-1 h-3 bg-primary-500 rounded-full"
-                    animate={{ scaleY: [0.2, 1, 0.2] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.div 
-                    className="w-1 h-3 bg-primary-500 rounded-full"
-                    animate={{ scaleY: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
-                  />
-                  <motion.div 
-                    className="w-1 h-3 bg-primary-500 rounded-full"
-                    animate={{ scaleY: [0.5, 1, 0.5] }}
-                    transition={{ duration: 0.6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                  />
-                </div>
-              )}
-            </div>
-          )}
-          
-          <div>
-            <p className={`${isAI ? 'text-neutral-900' : 'text-white'}`}>{message.text}</p>
-            <p className={`text-xs mt-1 ${isAI ? 'text-neutral-500' : 'text-primary-200'}`}>
-              {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              {isAI && (
-                <button className="ml-2 hover:text-primary-500 transition-colors">
-                  <Volume2 size={14} />
-                </button>
-              )}
-            </p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 };
 

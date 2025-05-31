@@ -1,3 +1,5 @@
+import { marked } from 'marked';
+
 export const models = {
   'sonar-deep-research': 'sonar-deep-research',
   'sonar-reasoning-pro': 'sonar-reasoning-pro',
@@ -30,14 +32,6 @@ interface PerplexityResponse {
   }[];
   citations?: string[];
   search_results?: SearchResult[];
-}
-
-interface FormattedResponse {
-  content: string;
-  citations?: Array<{
-    text: string;
-    url?: string;
-  }>;
 }
 
 export class PerplexityClient {
@@ -102,26 +96,28 @@ export class PerplexityClient {
   private formatResponse(response: PerplexityResponse): string {
     let formattedText = response.choices[0].message.content;
 
-    // Add citations if available
+    // Add citations and search results if available
     if (response.citations?.length || response.search_results?.length) {
-      formattedText += '\n\nSources:\n';
+      formattedText += '\n\n---\n\n**Sources:**\n\n';
       
-      // Add direct citations
+      // Format citations as markdown links
       if (response.citations?.length) {
-        formattedText += response.citations
-          .map(citation => `• ${citation}`)
-          .join('\n');
+        response.citations.forEach((citation, index) => {
+          formattedText += `[${index + 1}] ${citation}\n`;
+        });
       }
 
-      // Add search results with clickable links
+      // Format search results as markdown links
       if (response.search_results?.length) {
-        formattedText += response.search_results
-          .map(result => `• [${result.title}](${result.url})${result.date ? ` (${result.date})` : ''}`)
-          .join('\n');
+        response.search_results.forEach(result => {
+          const date = result.date ? ` (${result.date})` : '';
+          formattedText += `- [${result.title}](${result.url})${date}\n`;
+        });
       }
     }
 
-    return formattedText;
+    // Convert markdown to HTML
+    return marked(formattedText);
   }
 
   isConfigured(): boolean {
