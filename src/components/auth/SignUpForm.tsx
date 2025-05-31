@@ -20,8 +20,16 @@ export default function SignUpForm() {
 
     try {
       const { error } = await signUp(email, password);
-      if (error) throw error;
-      navigate('/dashboard');
+      if (error) {
+        if (error.message.includes('already registered')) {
+          setError('This email is already registered. Please sign in instead.');
+        } else {
+          throw error;
+        }
+      } else {
+        // Automatically sign in the user after successful signup
+        navigate('/dashboard');
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
