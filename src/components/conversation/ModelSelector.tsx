@@ -9,7 +9,8 @@ interface ModelSelectorProps {
 }
 
 const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSelectorProps) => {
-  const modelInfo = {
+  // Ensure modelInfo has an entry for every model type defined in perplexity.ts
+  const modelInfo: Record<ModelType, { name: string; description: string }> = {
     mistral: {
       name: 'Mistral-7B',
       description: 'Fast and efficient for general conversations'
@@ -25,7 +26,16 @@ const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSele
     sonar: {
       name: 'Sonar Small',
       description: 'Optimized for natural chat interactions'
-    }
+    },
+    // Add a safe fallback for any model type that might be in models but not explicitly defined
+    ...Object.fromEntries(
+      Object.keys(models)
+        .filter(key => !(key in modelInfo))
+        .map(key => [key, {
+          name: key.charAt(0).toUpperCase() + key.slice(1),
+          description: 'AI language model'
+        }])
+    )
   };
 
   return (
@@ -40,7 +50,7 @@ const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSele
       >
         {Object.entries(models).map(([key, value]) => (
           <option key={key} value={key}>
-            {modelInfo[key as ModelType].name}
+            {modelInfo[key as ModelType]?.name || key}
           </option>
         ))}
       </select>
