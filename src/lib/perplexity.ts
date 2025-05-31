@@ -1,3 +1,14 @@
+export const models = {
+  'sonar-deep-research': 'sonar-deep-research',
+  'sonar-reasoning-pro': 'sonar-reasoning-pro',
+  'sonar-reasoning': 'sonar-reasoning',
+  'sonar-pro': 'sonar-pro',
+  'sonar': 'sonar',
+  'r1-1776': 'r1-1776'
+};
+
+export type ModelType = keyof typeof models;
+
 interface Message {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -13,28 +24,36 @@ interface PerplexityResponse {
   }[];
 }
 
-export const models = {
-  mistral: "mistral-7b-instruct",
-  codellama: "codellama-34b-instruct",
-  mixtral: "mixtral-8x7b-instruct",
-};
-
-export type ModelType = keyof typeof models;
-
 export class PerplexityClient {
   private apiKey: string | undefined;
   private model: string;
   private baseUrl = 'https://api.perplexity.ai/chat/completions';
 
-  constructor(model = models.mixtral) {
+  constructor(model = models.sonar) {
     this.apiKey = import.meta.env.VITE_PERPLEXITY_API_KEY;
     this.model = model;
   }
 
-  async chat(messages: Message[]): Promise<string> {
+  async chat(userMessage: string, model?: ModelType): Promise<string> {
     if (!this.apiKey) {
-      throw new Error('Perplexity API key not configured');
+      console.warn('Perplexity API Not Configured\nUsing fallback responses. Add VITE_PERPLEXITY_API_KEY to enable AI chat.');
+      return this.getFallbackResponse(userMessage);
     }
+
+    if (model) {
+      this.model = models[model];
+    }
+
+    const messages: Message[] = [
+      {
+        role: 'system',
+        content: 'You are HUG, an empathetic AI mental health companion. Provide supportive, understanding responses while maintaining appropriate boundaries and encouraging professional help when needed.'
+      },
+      {
+        role: 'user',
+        content: userMessage
+      }
+    ];
 
     try {
       const response = await fetch(this.baseUrl, {
@@ -59,10 +78,8 @@ export class PerplexityClient {
       const data: PerplexityResponse = await response.json();
       return data.choices[0].message.content;
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(`Perplexity API error: ${error.message}`);
-      }
-      throw error;
+      console.error('Perplexity API error:', error);
+      return this.getFallbackResponse(userMessage);
     }
   }
 
