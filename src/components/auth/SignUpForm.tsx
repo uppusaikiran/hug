@@ -10,7 +10,7 @@ export default function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { signUp } = useAuth();
+  const { signUp, signIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,17 +19,24 @@ export default function SignUpForm() {
     setLoading(true);
 
     try {
-      const { error } = await signUp(email, password);
-      if (error) {
-        if (error.message.includes('already registered')) {
-          setError('This email is already registered. Please sign in instead.');
-        } else {
-          throw error;
+      // Try to sign up
+      const { error: signUpError } = await signUp(email, password);
+      
+      if (signUpError) {
+        // If email already exists, try to sign in instead
+        if (signUpError.message.includes('already registered')) {
+          const { error: signInError } = await signIn(email, password);
+          if (signInError) {
+            throw signInError;
+          }
+          navigate('/dashboard');
+          return;
         }
-      } else {
-        // Automatically sign in the user after successful signup
-        navigate('/dashboard');
+        throw signUpError;
       }
+
+      // If signup successful, navigate to dashboard
+      navigate('/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {
