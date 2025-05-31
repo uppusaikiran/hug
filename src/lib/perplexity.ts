@@ -106,7 +106,7 @@ export class PerplexityClient {
         response.citations.forEach((citation, index) => {
           const citationId = `citation-${index + 1}`;
           // Add citation reference in text
-          formattedText = formattedText.replace(`[${index + 1}]`, `<a href="#${citationId}" class="citation-link">[${index + 1}]</a>`);
+          formattedText = formattedText.replace(`[${index + 1}]`, `[${index + 1}](#${citationId})`);
           // Add citation to list
           citations.push(`<div id="${citationId}" class="citation-item">
             <span class="citation-number">[${index + 1}]</span>
@@ -122,11 +122,7 @@ export class PerplexityClient {
           citations.push(`<div class="search-result">
             <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="search-link">
               ${result.title}${date}
-              <svg class="external-link" viewBox="0 0 24 24" width="12" height="12">
-                <path fill="currentColor" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
+              <span class="external-link">↗</span>
             </a>
           </div>`);
         });
@@ -137,78 +133,6 @@ export class PerplexityClient {
         formattedText += citations.join('\n');
       }
     }
-
-    // Add custom styles for citations
-    formattedText = `
-      <style>
-        .citation-link {
-          color: #6366f1;
-          text-decoration: none;
-          font-weight: 500;
-          padding: 0.125rem 0.25rem;
-          margin: -0.125rem -0.25rem;
-          border-radius: 0.25rem;
-          transition: all 0.2s;
-        }
-        .citation-link:hover {
-          text-decoration: underline;
-          background: rgba(99, 102, 241, 0.1);
-        }
-        .citation-item {
-          margin: 0.75rem 0;
-          padding: 0.75rem;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 0.75rem;
-          font-size: 0.875rem;
-          display: flex;
-          gap: 0.5rem;
-          transition: all 0.2s;
-        }
-        .citation-item:hover {
-          background: #f1f5f9;
-          border-color: #cbd5e1;
-        }
-        .citation-number {
-          color: #6366f1;
-          font-weight: 600;
-          flex-shrink: 0;
-        }
-        .citation-text {
-          color: #475569;
-          line-height: 1.5;
-        }
-        .search-result {
-          margin: 0.75rem 0;
-        }
-        .search-link {
-          color: #6366f1;
-          text-decoration: none;
-          font-weight: 500;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.375rem;
-          padding: 0.375rem 0.75rem;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 0.5rem;
-          transition: all 0.2s;
-        }
-        .search-link:hover {
-          background: #f1f5f9;
-          border-color: #cbd5e1;
-          text-decoration: underline;
-        }
-        .external-link {
-          opacity: 0.5;
-          transition: opacity 0.2s;
-        }
-        .search-link:hover .external-link {
-          opacity: 0.75;
-        }
-      </style>
-      ${formattedText}
-    `;
 
     // Convert markdown to HTML
     return marked(formattedText, { mangle: false, headerIds: false });

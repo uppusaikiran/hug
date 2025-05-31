@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Enhanced Primary Colors with more vibrancy */
+  /* Primary Colors */
   --color-primary-50: 240 249 255;
   --color-primary-100: 224 242 254;
   --color-primary-200: 186 230 253;
@@ -16,7 +16,7 @@
   --color-primary-900: 12 74 110;
   --color-primary-950: 8 47 73;
   
-  /* Enhanced Secondary Colors (Emerald Green) */
+  /* Secondary Colors */
   --color-secondary-50: 236 253 245;
   --color-secondary-100: 209 250 229;
   --color-secondary-200: 167 243 208;
@@ -29,7 +29,7 @@
   --color-secondary-900: 6 78 59;
   --color-secondary-950: 2 44 34;
   
-  /* Enhanced Accent Colors (Purple/Violet) */
+  /* Accent Colors */
   --color-accent-50: 250 245 255;
   --color-accent-100: 243 232 255;
   --color-accent-200: 233 213 255;
@@ -55,7 +55,7 @@
   --color-neutral-900: 71 62 41;
   --color-neutral-950: 36 31 20;
   
-  /* Success, Warning, Error Colors */
+  /* Status Colors */
   --color-success-500: 34 197 94;
   --color-warning-500: 234 179 8;
   --color-error-500: 239 68 68;
@@ -65,9 +65,7 @@
   body {
     @apply bg-gradient-to-br from-neutral-50 via-primary-50/30 to-accent-50/20 text-neutral-900 font-sans antialiased;
     background-attachment: fixed;
-    /* Improve mobile scrolling */
     -webkit-overflow-scrolling: touch;
-    /* Prevent zoom on input focus on iOS */
     -webkit-text-size-adjust: 100%;
   }
   
@@ -107,7 +105,6 @@
     @apply leading-relaxed;
   }
   
-  /* Smooth scrolling */
   * {
     scroll-behavior: smooth;
   }
@@ -116,7 +113,6 @@
 @layer components {
   .btn {
     @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
-    /* Improve touch targets on mobile */
     min-height: 44px;
     min-width: 44px;
   }
@@ -155,17 +151,48 @@
   
   .input {
     @apply w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all duration-200;
-    /* Prevent zoom on iOS */
     font-size: 16px;
   }
   
   .floating-element {
     @apply fixed bottom-6 right-6 bg-gradient-to-r from-primary-500 to-accent-500 text-white p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50;
   }
+
+  /* Citation Styles */
+  .citation-link {
+    @apply text-primary-600 no-underline font-medium hover:underline hover:bg-primary-50 px-1 -mx-1 rounded transition-colors;
+  }
+
+  .citation-item {
+    @apply my-3 p-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm flex gap-2 hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
+  }
+
+  .citation-number {
+    @apply text-primary-600 font-semibold flex-shrink-0;
+  }
+
+  .citation-text {
+    @apply text-neutral-700 leading-relaxed;
+  }
+
+  .search-result {
+    @apply my-3;
+  }
+
+  .search-link {
+    @apply text-primary-600 no-underline font-medium inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
+  }
+
+  .external-link {
+    @apply opacity-50 transition-opacity;
+  }
+
+  .search-link:hover .external-link {
+    @apply opacity-75;
+  }
 }
 
 @layer utilities {
-  /* Line clamp utilities */
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -187,7 +214,6 @@
     -webkit-line-clamp: 3;
   }
   
-  /* Mobile-specific utilities */
   .touch-target {
     min-height: 44px;
     min-width: 44px;
@@ -209,7 +235,6 @@
     padding-right: env(safe-area-inset-right);
   }
   
-  /* Prevent text selection on interactive elements */
   .no-select {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -217,216 +242,8 @@
     user-select: none;
   }
   
-  /* Smooth scrolling container */
   .smooth-scroll {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
-}
-
-/* Enhanced Animations */
-@keyframes breathe {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.animate-breathe {
-  animation: breathe 8s infinite ease-in-out;
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 6s infinite ease-in-out;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(var(--color-primary-500), 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(var(--color-primary-500), 0.6);
-  }
-}
-
-.animate-glow {
-  animation: glow 3s infinite ease-in-out;
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-/* Transitions */
-.page-transition-enter {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 300ms, transform 300ms;
-}
-
-/* ElevenLabs ConvAI Widget Styles */
-.widget-container {
-  width: 100%;
-  height: 280px;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.9) 0%, 
-    rgba(248, 250, 252, 0.95) 25%,
-    rgba(241, 245, 249, 0.9) 50%,
-    rgba(236, 242, 251, 0.95) 75%,
-    rgba(249, 250, 251, 0.9) 100%);
-  border: 2px solid rgba(99, 179, 237, 0.3);
-  border-radius: 16px;
-  padding: 16px;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-    0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-  margin: 0 auto;
-}
-
-.widget-container:hover {
-  border-color: rgba(99, 179, 237, 0.4);
-  box-shadow: 
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 
-    0 4px 6px -2px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.15);
-}
-
-.dark .widget-container {
-  background: linear-gradient(135deg, 
-    rgba(30, 41, 59, 0.8) 0%, 
-    rgba(51, 65, 85, 0.85) 25%,
-    rgba(71, 85, 105, 0.8) 50%,
-    rgba(51, 65, 85, 0.85) 75%,
-    rgba(30, 41, 59, 0.8) 100%);
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.3), 
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-.dark .widget-container:hover {
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 
-    0 10px 15px -3px rgba(0, 0, 0, 0.3), 
-    0 4px 6px -2px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.widget-container elevenlabs-convai {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  display: block !important;
-  border: none !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-elevenlabs-convai {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  overflow: hidden !important;
-  border-radius: 8px !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* Ensure the widget's shadow DOM content is contained */
-elevenlabs-convai * {
-  box-sizing: border-box !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-}
-
-/* Additional containment for any floating elements */
-elevenlabs-convai::part(container) {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  overflow: hidden !important;
 }
