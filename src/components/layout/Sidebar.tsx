@@ -99,8 +99,8 @@ const Sidebar = () => {
       >
         <div className="p-4 border-b border-neutral-200">
           <div className="flex items-center gap-2">
-            <img src="/hug.png" alt="HUG" className="h-8 w-8" />
-            <span className="text-xl font-display font-bold text-primary-800">HUG</span>
+            <img src="/hug.png" alt="huggy" className="h-8 w-8" />
+            <span className="text-xl font-display font-bold text-primary-800">huggy</span>
           </div>
         </div>
         
@@ -147,8 +147,8 @@ const Sidebar = () => {
           >
             <div className="p-4 border-b border-neutral-200 mt-16">
               <div className="flex items-center gap-2">
-                <img src="/hug.png" alt="HUG" className="h-8 w-8" />
-                <span className="text-xl font-display font-bold text-primary-800">HUG</span>
+                              <img src="/hug.png" alt="huggy" className="h-8 w-8" />
+              <span className="text-xl font-display font-bold text-primary-800">huggy</span>
               </div>
               {user && (
                 <p className="text-sm text-neutral-600 mt-2">

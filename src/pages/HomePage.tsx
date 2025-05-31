@@ -69,7 +69,7 @@ const HomePage = () => {
       name: "Sarah M.",
       age: 26,
       role: "Marketing Professional",
-      content: "HUG helped me through my worst anxiety attacks. Having someone to talk to at 3 AM when I couldn't sleep made all the difference.",
+      content: "huggy helped me through my worst anxiety attacks. Having someone to talk to at 3 AM when I couldn't sleep made all the difference.",
       rating: 5,
       improvement: "80% reduction in anxiety"
     },
@@ -112,7 +112,7 @@ const HomePage = () => {
       
       {/* Comforting Message */}
       <ComfortingMessage
-        message="You're not alone. HUG is here to listen, support, and care for you. 💝"
+        message="You're not alone. huggy is here to listen, support, and care for you. 💝"
         visible={showComfortMessage}
         onClose={() => setShowComfortMessage(false)}
         position="top"
@@ -210,7 +210,7 @@ const HomePage = () => {
             transition={{ duration: 4, repeat: Infinity }}
             style={{ backgroundSize: '200% 200%' }}
           >
-            HUG
+            huggy
           </motion.span>
         </div>
         
@@ -268,7 +268,7 @@ const HomePage = () => {
               </h1>
               
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Always here, always caring. HUG provides empathetic support, crisis intervention, 
+                Always here, always caring. huggy provides empathetic support, crisis intervention, 
                 guided wellness activities, and professional resources whenever you need them.
               </p>
               
@@ -492,7 +492,7 @@ const HomePage = () => {
                 Comprehensive Mental Health Support
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                HUG combines AI empathy with professional resources to provide complete mental health care
+                                  huggy combines AI empathy with professional resources to provide complete mental health care
               </p>
             </motion.div>
             
@@ -551,7 +551,7 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">How HUG Works</h2>
+                              <h2 className="text-4xl font-bold text-gray-900 mb-4">How huggy Works</h2>
               <p className="text-xl text-gray-600">Simple steps to better mental health</p>
             </motion.div>
             
@@ -559,7 +559,7 @@ const HomePage = () => {
               <StepCard 
                 number={1}
                 title="Start a Conversation"
-                description="Begin talking with HUG through voice or text. Share your feelings, concerns, or just say hello."
+                                  description="Begin talking with huggy through voice or text. Share your feelings, concerns, or just say hello."
                 icon={<MessageCircle className="h-8 w-8 text-purple-500" />}
               />
               
@@ -590,7 +590,7 @@ const HomePage = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Real Stories, Real Impact</h2>
-              <p className="text-xl text-gray-600">See how HUG has transformed lives</p>
+                              <p className="text-xl text-gray-600">See how huggy has transformed lives</p>
             </motion.div>
             
             <div className="max-w-4xl mx-auto">
@@ -717,7 +717,7 @@ const HomePage = () => {
                 Ready to Start Your Mental Health Journey?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Join thousands who have found support, guidance, and hope with HUG. 
+                Join thousands who have found support, guidance, and hope with huggy. 
                 Your mental health matters, and help is just a conversation away.
               </p>
               
@@ -761,7 +761,7 @@ const HomePage = () => {
                 >
                   <Heart className="h-5 w-5 text-white" />
                 </motion.div>
-                <span className="text-xl font-bold">HUG</span>
+                <span className="text-xl font-bold">huggy</span>
               </div>
               <p className="text-gray-400 leading-relaxed">
                 Your 24/7 AI companion for mental health support, crisis intervention, and wellness guidance.
@@ -805,7 +805,7 @@ const HomePage = () => {
           
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 mb-4 md:mb-0">
-              © {new Date().getFullYear()} HUG. All rights reserved. Built with ❤️ for mental wellness.
+                              © {new Date().getFullYear()} huggy. All rights reserved. Built with ❤️ for mental wellness.
             </p>
             <div className="flex gap-6 text-gray-400">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

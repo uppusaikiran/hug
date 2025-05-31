@@ -27,7 +27,7 @@ const ConversationPage = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm your HUG companion. How are you feeling today?",
+              text: "Hello! I'm your huggy companion. How are you feeling today?",
       sender: 'ai',
       timestamp: new Date()
     }

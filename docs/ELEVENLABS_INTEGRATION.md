@@ -1,6 +1,6 @@
 # ElevenLabs Conversational AI Integration
 
-This document explains how to integrate and use the ElevenLabs Conversational AI mindfulness coach feature in HUG.
+This document explains how to integrate and use the ElevenLabs Conversational AI mindfulness coach feature in huggy.
 
 ## Overview
 
@@ -217,4 +217,4 @@ For issues specific to the ElevenLabs integration:
 3. Test with the ElevenLabs API directly
 4. Contact ElevenLabs support for API-related issues
 
-For HUG specific issues, please refer to the main project documentation. 
+For huggy specific issues, please refer to the main project documentation. 

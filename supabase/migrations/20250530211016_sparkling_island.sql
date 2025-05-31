@@ -97,7 +97,7 @@ CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
--- HUG Database Setup Script
+-- huggy Database Setup Script
 -- Run this in your Supabase SQL Editor to create all necessary tables
 
 -- Create profiles table (if not exists)

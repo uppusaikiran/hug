@@ -1,14 +1,14 @@
-# HUG - AI-Driven Mental Health Companion
+# huggy - AI-Driven Mental Health Companion
 ## Product Requirements Document (PRD)
 
 ### Executive Summary
 
-**Project Name:** HUG  
+**Project Name:** huggy  
 **Tagline:** "Your 24/7 AI Mental Health Companion - Always Here, Always Caring"  
 **Target Hackathon:** World's Largest Hackathon presented by Bolt (Voice AI Challenge)  
 **Submission Deadline:** June 30, 2025  
 
-HUG is a revolutionary web application that democratizes mental health support through conversational AI technology. Built on Bolt.new with ElevenLabs voice AI integration, it provides 24/7 empathetic mental health support, crisis intervention, and personalized wellness programs to address the global mental health crisis affecting over 1 billion people worldwide.
+huggy is a revolutionary web application that democratizes mental health support through conversational AI technology. Built on Bolt.new with ElevenLabs voice AI integration, it provides 24/7 empathetic mental health support, crisis intervention, and personalized wellness programs to address the global mental health crisis affecting over 1 billion people worldwide.
 
 ---
 
@@ -927,7 +927,7 @@ mind-haven/
 
 ## 16. Conclusion
 
-HUG represents a transformative approach to mental health support, leveraging cutting-edge AI technology to address one of the most pressing global health challenges. By combining the natural conversation capabilities of ElevenLabs with comprehensive mental health tools and crisis intervention protocols, we're creating a solution that can truly save lives and improve mental health outcomes at scale.
+huggy represents a transformative approach to mental health support, leveraging cutting-edge AI technology to address one of the most pressing global health challenges. By combining the natural conversation capabilities of ElevenLabs with comprehensive mental health tools and crisis intervention protocols, we're creating a solution that can truly save lives and improve mental health outcomes at scale.
 
 The project aligns perfectly with the World's Largest Hackathon's judging criteria, offering:
 
@@ -936,15 +936,15 @@ The project aligns perfectly with the World's Largest Hackathon's judging criter
 - **Technical Excellence:** Advanced integration of Bolt.new, ElevenLabs, and modern web technologies
 - **Superior User Experience:** Empathetic, accessible, and engaging design that reduces barriers to mental health support
 
-With the growing awareness of mental health issues, the acceleration of AI technology adoption, and the increasing demand for accessible healthcare solutions, HUG is positioned to become a category-defining product that not only wins the hackathon but transforms into a sustainable, impactful business that improves millions of lives worldwide.
+With the growing awareness of mental health issues, the acceleration of AI technology adoption, and the increasing demand for accessible healthcare solutions, huggy is positioned to become a category-defining product that not only wins the hackathon but transforms into a sustainable, impactful business that improves millions of lives worldwide.
 
 The combination of immediate crisis intervention, personalized wellness programs, and gamified engagement creates a comprehensive solution that addresses the full spectrum of mental health needs while maintaining the highest standards of privacy, safety, and ethical AI development.
 
-HUG isn't just a hackathon project—it's the foundation for a new era of accessible, empathetic, and effective mental health support that can scale globally and create lasting positive impact on human wellbeing.
+huggy isn't just a hackathon project—it's the foundation for a new era of accessible, empathetic, and effective mental health support that can scale globally and create lasting positive impact on human wellbeing.
 
 ---
 
 **Document Version:** 1.0  
 **Last Updated:** January 2025  
 **Next Review:** Post-Hackathon Submission  
-**Document Owner:** HUG Development Team
+**Document Owner:** huggy Development Team

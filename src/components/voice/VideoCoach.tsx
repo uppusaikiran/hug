@@ -246,7 +246,7 @@ const VideoCoach: React.FC<VideoCoachProps> = ({ isOpen, onClose }) => {
       const requestBody = {
         replica_id: config.replicaId,
         persona_id: config.personaId,
-        conversation_name: 'HUG Wellness Session',
+        conversation_name: 'huggy Wellness Session',
         conversational_context: `You are a compassionate AI wellness coach specializing in mindfulness, meditation, and mental health support. 
           You're here to help users with their wellness journey through guided conversations. 
           Be empathetic, supportive, and knowledgeable about meditation techniques, stress management, and emotional wellbeing.

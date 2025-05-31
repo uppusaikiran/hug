@@ -385,7 +385,7 @@ const getResourceIcon = (type: string) => {
   return iconMap[type as keyof typeof iconMap] || <Lightbulb size={16} className="text-gray-500" />;
 };
 
-// Sample resource data aligned with HUG's comprehensive approach
+// Sample resource data aligned with huggy's comprehensive approach
 const resources: Resource[] = [
   // Crisis Support Resources
   {

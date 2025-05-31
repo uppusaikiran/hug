@@ -539,7 +539,7 @@ const Dashboard = () => {
           <div className="bg-white rounded-lg p-4 border border-primary-100">
             <h3 className="font-semibold text-primary-800 mb-2">Success Story</h3>
             <p className="text-sm text-neutral-600 mb-2">
-              "HUG helped me through my anxiety. The voice companion feels so real and caring."
+              "huggy helped me through my anxiety. The voice companion feels so real and caring."
             </p>
             <p className="text-xs text-neutral-500">- Anonymous user</p>
           </div>

@@ -48,7 +48,7 @@ export default function SignUpForm() {
         </div>
         
         <h2 className="text-center text-3xl font-bold tracking-tight text-neutral-900 font-display">
-          Join HUG
+          Join huggy
         </h2>
         <p className="mt-2 text-center text-sm text-neutral-600">
           Start your mental wellness journey today

@@ -57,7 +57,7 @@ export class PerplexityClient {
     const messages: Message[] = [
       {
         role: 'system',
-        content: 'You are HUG, an empathetic AI mental health companion. Provide supportive, understanding responses while maintaining appropriate boundaries and encouraging professional help when needed.'
+        content: 'You are huggy, an empathetic AI mental health companion. Provide supportive, understanding responses while maintaining appropriate boundaries and encouraging professional help when needed.'
       },
       {
         role: 'user',

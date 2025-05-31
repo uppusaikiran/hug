@@ -271,7 +271,7 @@ interface LovingMessageBubbleProps {
 
 export const LovingMessageBubble = ({ 
   message, 
-  author = "HUG",
+  author = "huggy",
   className = ""
 }: LovingMessageBubbleProps) => (
   <motion.div

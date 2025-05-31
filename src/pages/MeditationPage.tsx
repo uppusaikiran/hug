@@ -685,7 +685,7 @@ const BreathingPlayer = ({ pattern, isActive, setIsActive, onClose }: {
   );
 };
 
-// Sample data aligned with HUG's comprehensive approach - minimal starter content
+// Sample data aligned with huggy's comprehensive approach - minimal starter content
 const guidedMeditations: MeditationSession[] = [
   {
     id: 'welcome-meditation',

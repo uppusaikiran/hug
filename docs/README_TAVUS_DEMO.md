@@ -1,10 +1,10 @@
-# 🎥 HUG + Tavus: Conversational AI Video Challenge
+# 🎥 huggy + Tavus: Conversational AI Video Challenge
 
-Welcome to HUG's groundbreaking integration with **Tavus Conversational Video Interface (CVI)** - bringing real-time AI video agents to mental wellness!
+Welcome to huggy's groundbreaking integration with **Tavus Conversational Video Interface (CVI)** - bringing real-time AI video agents to mental wellness!
 
 ## 🌟 What's New: AI Video Wellness Coach
 
-HUG now features **next-generation video conversations** with AI wellness coaches that look, sound, and respond like real humans. This is powered by Tavus's cutting-edge technology stack:
+huggy now features **next-generation video conversations** with AI wellness coaches that look, sound, and respond like real humans. This is powered by Tavus's cutting-edge technology stack:
 
 ### 🚀 Revolutionary Features
 

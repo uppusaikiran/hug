@@ -100,7 +100,7 @@ const CrisisPage = () => {
                 {currentStep === 3 && (
                   <HeartbeatAnimation intensity="gentle">
                     <Link to="/conversation" className="btn btn-primary">
-                      Talk to HUG
+                      Talk to huggy
                     </Link>
                   </HeartbeatAnimation>
                 )}
@@ -117,7 +117,7 @@ const CrisisPage = () => {
               <WarmthIndicator level="medium" />
             </div>
             <p className="text-neutral-700">
-              HUG is here to provide support, but is not a substitute for professional help in emergencies.
+              huggy is here to provide support, but is not a substitute for professional help in emergencies.
               If you or someone else is in immediate danger, please call emergency services immediately.
             </p>
           </div>

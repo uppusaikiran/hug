@@ -1,10 +1,10 @@
 # Tavus AI Video Integration Guide
 
-This document explains how HUG integrates with Tavus to provide real-time AI video conversations using the Conversational Video Interface (CVI).
+This document explains how huggy integrates with Tavus to provide real-time AI video conversations using the Conversational Video Interface (CVI).
 
 ## Overview
 
-HUG now features **two AI interaction modes**:
+huggy now features **two AI interaction modes**:
 
 1. **Voice-Only Chat** - Audio-based conversations using ElevenLabs
 2. **Video Chat** - Real-time face-to-face conversations using Tavus CVI
@@ -101,7 +101,7 @@ const response = await fetch('https://tavusapi.com/v2/conversations', {
   body: JSON.stringify({
     replica_id: config.replicaId,
     persona_id: config.personaId,
-            conversation_name: 'HUG Wellness Session',
+            conversation_name: 'huggy Wellness Session',
     conversational_context: 'Wellness coach specializing in mindfulness...',
     custom_greeting: 'Hello! I'm your personal wellness coach...',
     properties: {

@@ -1,8 +1,8 @@
-# HUG - AI Mental Health Companion
+# huggy - AI Mental Health Companion
 
-<img src="public/hug.png" alt="HUG" width="100" height="100">
+<img src="public/hug.png" alt="huggy" width="100" height="100">
 
-HUG is a revolutionary AI-powered mental health companion that provides 24/7 empathetic support, crisis intervention, and personalized wellness guidance. Built with cutting-edge AI technology, HUG offers a safe space for users to explore their mental wellbeing through natural conversations and guided activities.
+huggy is a revolutionary AI-powered mental health companion that provides 24/7 empathetic support, crisis intervention, and personalized wellness guidance. Built with cutting-edge AI technology, huggy offers a safe space for users to explore their mental wellbeing through natural conversations and guided activities.
 
 ## 🌟 Features
 
