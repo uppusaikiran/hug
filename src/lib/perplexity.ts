@@ -108,7 +108,10 @@ export class PerplexityClient {
           // Add citation reference in text
           formattedText = formattedText.replace(`[${index + 1}]`, `<a href="#${citationId}" class="citation-link">[${index + 1}]</a>`);
           // Add citation to list
-          citations.push(`<div id="${citationId}" class="citation-item">[${index + 1}] ${citation}</div>`);
+          citations.push(`<div id="${citationId}" class="citation-item">
+            <span class="citation-number">[${index + 1}]</span>
+            <span class="citation-text">${citation}</span>
+          </div>`);
         });
       }
 
@@ -142,19 +145,41 @@ export class PerplexityClient {
           color: #6366f1;
           text-decoration: none;
           font-weight: 500;
+          padding: 0.125rem 0.25rem;
+          margin: -0.125rem -0.25rem;
+          border-radius: 0.25rem;
+          transition: all 0.2s;
         }
         .citation-link:hover {
           text-decoration: underline;
+          background: rgba(99, 102, 241, 0.1);
         }
         .citation-item {
-          margin: 0.5rem 0;
-          padding: 0.5rem;
-          background: #f3f4f6;
-          border-radius: 0.5rem;
+          margin: 0.75rem 0;
+          padding: 0.75rem;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.75rem;
           font-size: 0.875rem;
+          display: flex;
+          gap: 0.5rem;
+          transition: all 0.2s;
+        }
+        .citation-item:hover {
+          background: #f1f5f9;
+          border-color: #cbd5e1;
+        }
+        .citation-number {
+          color: #6366f1;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+        .citation-text {
+          color: #475569;
+          line-height: 1.5;
         }
         .search-result {
-          margin: 0.5rem 0;
+          margin: 0.75rem 0;
         }
         .search-link {
           color: #6366f1;
@@ -162,13 +187,24 @@ export class PerplexityClient {
           font-weight: 500;
           display: inline-flex;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.375rem;
+          padding: 0.375rem 0.75rem;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.5rem;
+          transition: all 0.2s;
         }
         .search-link:hover {
+          background: #f1f5f9;
+          border-color: #cbd5e1;
           text-decoration: underline;
         }
         .external-link {
           opacity: 0.5;
+          transition: opacity 0.2s;
+        }
+        .search-link:hover .external-link {
+          opacity: 0.75;
         }
       </style>
       ${formattedText}

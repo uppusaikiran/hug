@@ -114,9 +114,24 @@ export default {
         '2xl': '1.5rem',
         '3xl': '2rem',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              color: 'rgb(var(--color-primary-600))',
+              textDecoration: 'none',
+              fontWeight: '500',
+              '&:hover': {
+                textDecoration: 'underline',
+              },
+            },
+          },
+        },
+      },
     },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/typography'),
   ],
 };
