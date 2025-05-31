@@ -4,7 +4,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
-target 'HUG' do
+target 'HUG\' do
   config = use_native_modules!
 
   use_react_native!(
