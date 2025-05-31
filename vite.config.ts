@@ -8,4 +8,18 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   base: './', // Required for Capacitor
+  build: {
+    sourcemap: true,
+    minify: 'terser',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['framer-motion', 'lucide-react'],
+          data: ['@supabase/supabase-js', 'zustand']
+        }
+      }
+    }
+  }
 });
