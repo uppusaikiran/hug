@@ -30,13 +30,13 @@ const Layout = () => {
       </div>
       
       {/* Sidebar with gradient background */}
-      <div className="hidden md:block w-64 bg-gradient-to-br from-primary-100/90 via-accent-50/90 to-secondary-100/90 backdrop-blur-md border-r border-white/20 shadow-lg relative z-10">
+      <div className="hidden md:block w-64 bg-gradient-to-br from-white/80 via-primary-50/80 to-accent-50/80 backdrop-blur-md border-r border-white/20 shadow-lg relative z-10">
         <Sidebar />
       </div>
 
       <div className="flex-1 flex flex-col overflow-hidden relative z-10">
         {/* Navbar with gradient background */}
-        <div className="bg-gradient-to-r from-primary-100/90 via-accent-50/90 to-secondary-100/90 border-b border-white/20 shadow-lg backdrop-blur-md relative z-20">
+        <div className="bg-gradient-to-r from-white/80 via-primary-50/80 to-accent-50/80 border-b border-white/20 shadow-lg backdrop-blur-md relative z-20">
           <Navbar />
         </div>
         
