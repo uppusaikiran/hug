@@ -30,8 +30,19 @@ const Navbar = () => {
       <FloatingEmotion emotion="peace" delay={4} className="top-3 left-1/3" />
       
       <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 relative z-10">
-        <div className="flex justify-end items-center">
-          {/* Right Section - User Menu Only */}
+        <div className="flex justify-end items-center gap-3">
+          {/* Direct Logout Button for better visibility */}
+          <motion.button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-all duration-200 border border-red-200 hover:border-red-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <LogOut className="h-4 w-4" />
+            <span className="hidden sm:inline">Sign Out</span>
+          </motion.button>
+
+          {/* Right Section - User Menu */}
           <div className="flex items-center">
             {/* User Menu */}
             <div className="relative">

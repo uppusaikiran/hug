@@ -12,13 +12,14 @@ import {
   User,
   TrendingUp,
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 const Sidebar = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const navItems = [
@@ -36,6 +37,11 @@ const Sidebar = () => {
   };
 
   const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
     setIsMobileMenuOpen(false);
   };
 
@@ -110,7 +116,7 @@ const Sidebar = () => {
           ))}
         </nav>
         
-        <div className="p-4 border-t border-neutral-200">
+        <div className="p-4 border-t border-neutral-200 space-y-3">
           <Link 
             to="/crisis" 
             className="w-full py-3 px-4 bg-error-500 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-error-600 transition-colors touch-target font-medium"
@@ -118,6 +124,14 @@ const Sidebar = () => {
             <Activity size={18} />
             <span>Crisis Support</span>
           </Link>
+          
+          <button
+            onClick={handleLogout}
+            className="w-full py-3 px-4 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 rounded-lg flex items-center justify-center gap-2 transition-colors touch-target font-medium border border-neutral-300"
+          >
+            <LogOut size={18} />
+            <span>Sign Out</span>
+          </button>
         </div>
       </motion.aside>
 
@@ -157,7 +171,7 @@ const Sidebar = () => {
               ))}
             </nav>
             
-            <div className="p-4 border-t border-neutral-200">
+            <div className="p-4 border-t border-neutral-200 space-y-3">
               <Link 
                 to="/crisis" 
                 onClick={closeMobileMenu}
@@ -166,6 +180,14 @@ const Sidebar = () => {
                 <Activity size={18} />
                 <span>Crisis Support</span>
               </Link>
+              
+              <button
+                onClick={handleLogout}
+                className="w-full py-3 px-4 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 rounded-lg flex items-center justify-center gap-2 transition-colors touch-target font-medium border border-neutral-300"
+              >
+                <LogOut size={18} />
+                <span>Sign Out</span>
+              </button>
             </div>
           </motion.aside>
         )}

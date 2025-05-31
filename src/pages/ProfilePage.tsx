@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -9,8 +9,12 @@ import {
   Download, 
   Trash2,
   ChevronRight,
-  Edit2
+  Edit2,
+  Loader2,
+  Save
 } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -116,102 +120,216 @@ const NavItem = ({ icon, label, isActive, onClick, danger }: NavItemProps) => (
   </button>
 );
 
-const ProfileSection = () => (
-  <div className="space-y-6">
-    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <div className="flex items-start justify-between mb-6">
-        <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-2xl font-semibold text-primary-700">
-            U
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold">User Name</h2>
-            <p className="text-neutral-600">user@example.com</p>
-          </div>
-        </div>
-        <button className="btn btn-ghost">
-          <Edit2 size={18} />
-          <span className="ml-2">Edit</span>
-        </button>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Full Name
-          </label>
-          <input 
-            type="text" 
-            className="input"
-            placeholder="Your full name"
-            value="User Name"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Email
-          </label>
-          <input 
-            type="email" 
-            className="input"
-            placeholder="Your email"
-            value="user@example.com"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Phone Number
-          </label>
-          <input 
-            type="tel" 
-            className="input"
-            placeholder="Your phone number"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Time Zone
-          </label>
-          <select className="input">
-            <option>Pacific Time (PT)</option>
-            <option>Mountain Time (MT)</option>
-            <option>Central Time (CT)</option>
-            <option>Eastern Time (ET)</option>
-          </select>
-        </div>
-      </div>
-      
-      <div className="mt-6 pt-6 border-t border-neutral-200">
-        <button className="btn btn-primary">Save Changes</button>
-      </div>
-    </div>
+const ProfileSection = () => {
+  const { user } = useAuth();
+  const { profile, loading, error, updateProfile } = useProfile();
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: '',
+    phone: '',
+    timezone: 'America/Los_Angeles'
+  });
+
+  // Update form data when profile loads
+  useEffect(() => {
+    if (profile) {
+      setFormData({
+        full_name: profile.full_name || '',
+        phone: profile.phone || '',
+        timezone: profile.timezone || 'America/Los_Angeles'
+      });
+    }
+  }, [profile]);
+
+  const handleSave = async () => {
+    if (!profile) return;
     
-    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <h3 className="text-lg font-semibold mb-4">Emergency Contacts</h3>
+    setIsSaving(true);
+    try {
+      await updateProfile(formData);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleCancel = () => {
+    if (profile) {
+      setFormData({
+        full_name: profile.full_name || '',
+        phone: profile.phone || '',
+        timezone: profile.timezone || 'America/Los_Angeles'
+      });
+    }
+    setIsEditing(false);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary-500 mx-auto mb-4" />
+          <p className="text-neutral-600">Loading your profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="text-center">
+          <div className="bg-error-50 border border-error-200 rounded-lg p-6 max-w-md">
+            <h3 className="text-error-800 font-medium mb-2">Unable to load profile</h3>
+            <p className="text-error-600 text-sm mb-4">{error}</p>
+            <button 
+              className="btn btn-primary"
+              onClick={() => window.location.reload()}
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const displayName = profile?.full_name || user?.email?.split('@')[0] || 'User';
+  const userEmail = user?.email || 'No email';
+  const userInitial = displayName.charAt(0).toUpperCase();
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-2xl font-semibold text-primary-700">
+              {userInitial}
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">{displayName}</h2>
+              <p className="text-neutral-600">{userEmail}</p>
+            </div>
+          </div>
+          <button 
+            className="btn btn-ghost"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            <Edit2 size={18} />
+            <span className="ml-2">{isEditing ? 'Cancel' : 'Edit'}</span>
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Full Name
+            </label>
+            <input 
+              type="text" 
+              className="input"
+              placeholder="Your full name"
+              value={formData.full_name}
+              onChange={(e) => setFormData(prev => ({ ...prev, full_name: e.target.value }))}
+              disabled={!isEditing}
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Email
+            </label>
+            <input 
+              type="email" 
+              className="input bg-neutral-50"
+              value={userEmail}
+              disabled
+            />
+            <p className="text-xs text-neutral-500 mt-1">Email cannot be changed</p>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Phone Number
+            </label>
+            <input 
+              type="tel" 
+              className="input"
+              placeholder="Your phone number"
+              value={formData.phone}
+              onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+              disabled={!isEditing}
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Time Zone
+            </label>
+            <select 
+              className="input"
+              value={formData.timezone}
+              onChange={(e) => setFormData(prev => ({ ...prev, timezone: e.target.value }))}
+              disabled={!isEditing}
+            >
+              <option value="America/Los_Angeles">Pacific Time (PT)</option>
+              <option value="America/Denver">Mountain Time (MT)</option>
+              <option value="America/Chicago">Central Time (CT)</option>
+              <option value="America/New_York">Eastern Time (ET)</option>
+            </select>
+          </div>
+        </div>
+        
+        {isEditing && (
+          <div className="mt-6 pt-6 border-t border-neutral-200 flex gap-3">
+            <button 
+              className="btn btn-primary"
+              onClick={handleSave}
+              disabled={isSaving}
+            >
+              {isSaving ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="h-4 w-4 mr-2" />
+                  Save Changes
+                </>
+              )}
+            </button>
+            <button 
+              className="btn btn-ghost"
+              onClick={handleCancel}
+              disabled={isSaving}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
       
-      <div className="space-y-4">
-        <EmergencyContact 
-          name="John Doe"
-          relation="Family"
-          phone="+1 (555) 123-4567"
-        />
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h3 className="text-lg font-semibold mb-4">Emergency Contacts</h3>
         
-        <EmergencyContact 
-          name="Jane Smith"
-          relation="Friend"
-          phone="+1 (555) 987-6543"
-        />
-        
-        <button className="btn btn-ghost w-full justify-center">
-          + Add Emergency Contact
-        </button>
+        <div className="space-y-4">
+          <div className="text-center py-8 text-neutral-500">
+            <p>No emergency contacts added yet</p>
+            <p className="text-sm mt-1">Add trusted contacts who can be reached in case of emergency</p>
+          </div>
+          
+          <button className="btn btn-ghost w-full justify-center">
+            + Add Emergency Contact
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface EmergencyContactProps {
   name: string;
@@ -314,90 +432,163 @@ const PreferencesSection = () => (
   </div>
 );
 
-const NotificationsSection = () => (
-  <div className="space-y-6">
-    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <h2 className="text-lg font-semibold mb-4">Notification Settings</h2>
-      
-      <div className="space-y-4">
-        <NotificationSetting 
-          title="Check-in Reminders"
-          description="Daily reminders to track your mood"
-          defaultChecked
-        />
+const NotificationsSection = () => {
+  const [notifications, setNotifications] = useState({
+    checkinReminders: true,
+    challengeUpdates: true,
+    meditationReminders: true,
+    communityActivity: false,
+    resourceRecommendations: true,
+    weekendDifferentSchedule: false,
+  });
+  const [quietHours, setQuietHours] = useState({
+    start: '22:00',
+    end: '08:00',
+  });
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleNotificationChange = (key: string, value: boolean) => {
+    setNotifications(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      // Here you would save to your backend/localStorage
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      console.log('Notifications saved:', { notifications, quietHours });
+    } catch (error) {
+      console.error('Failed to save notifications:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h2 className="text-lg font-semibold mb-4">Notification Settings</h2>
         
-        <NotificationSetting 
-          title="Challenge Updates"
-          description="Updates about your active challenges"
-          defaultChecked
-        />
-        
-        <NotificationSetting 
-          title="Meditation Reminders"
-          description="Reminders for scheduled meditation sessions"
-          defaultChecked
-        />
-        
-        <NotificationSetting 
-          title="Community Activity"
-          description="Updates from your support community"
-        />
-        
-        <NotificationSetting 
-          title="Resource Recommendations"
-          description="Personalized mental health resources"
-          defaultChecked
-        />
+        <div className="space-y-4">
+          <NotificationSetting 
+            title="Check-in Reminders"
+            description="Daily reminders to track your mood"
+            checked={notifications.checkinReminders}
+            onChange={(value) => handleNotificationChange('checkinReminders', value)}
+          />
+          
+          <NotificationSetting 
+            title="Challenge Updates"
+            description="Updates about your active challenges"
+            checked={notifications.challengeUpdates}
+            onChange={(value) => handleNotificationChange('challengeUpdates', value)}
+          />
+          
+          <NotificationSetting 
+            title="Meditation Reminders"
+            description="Reminders for scheduled meditation sessions"
+            checked={notifications.meditationReminders}
+            onChange={(value) => handleNotificationChange('meditationReminders', value)}
+          />
+          
+          <NotificationSetting 
+            title="Community Activity"
+            description="Updates from your support community"
+            checked={notifications.communityActivity}
+            onChange={(value) => handleNotificationChange('communityActivity', value)}
+          />
+          
+          <NotificationSetting 
+            title="Resource Recommendations"
+            description="Personalized mental health resources"
+            checked={notifications.resourceRecommendations}
+            onChange={(value) => handleNotificationChange('resourceRecommendations', value)}
+          />
+        </div>
       </div>
-    </div>
-    
-    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <h2 className="text-lg font-semibold mb-4">Notification Schedule</h2>
       
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Quiet Hours Start
-          </label>
-          <input type="time" className="input" defaultValue="22:00" />
-        </div>
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h2 className="text-lg font-semibold mb-4">Notification Schedule</h2>
         
-        <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-1">
-            Quiet Hours End
-          </label>
-          <input type="time" className="input" defaultValue="08:00" />
-        </div>
-        
-        <div className="flex items-center justify-between">
+        <div className="space-y-4">
           <div>
-            <h3 className="font-medium">Weekend Different Schedule</h3>
-            <p className="text-sm text-neutral-600">Use different quiet hours on weekends</p>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Quiet Hours Start
+            </label>
+            <input 
+              type="time" 
+              className="input" 
+              value={quietHours.start}
+              onChange={(e) => setQuietHours(prev => ({ ...prev, start: e.target.value }))}
+            />
           </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" className="sr-only peer" />
-            <div className="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
-          </label>
+          
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Quiet Hours End
+            </label>
+            <input 
+              type="time" 
+              className="input" 
+              value={quietHours.end}
+              onChange={(e) => setQuietHours(prev => ({ ...prev, end: e.target.value }))}
+            />
+          </div>
+          
+          <NotificationSetting 
+            title="Weekend Different Schedule"
+            description="Use different quiet hours on weekends"
+            checked={notifications.weekendDifferentSchedule}
+            onChange={(value) => handleNotificationChange('weekendDifferentSchedule', value)}
+          />
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <div className="flex justify-end">
+          <button 
+            className="btn btn-primary"
+            onClick={handleSave}
+            disabled={isSaving}
+          >
+            {isSaving ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4 mr-2" />
+                Save Preferences
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 interface NotificationSettingProps {
   title: string;
   description: string;
-  defaultChecked?: boolean;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
 }
 
-const NotificationSetting = ({ title, description, defaultChecked }: NotificationSettingProps) => (
+const NotificationSetting = ({ title, description, checked, onChange }: NotificationSettingProps) => (
   <div className="flex items-center justify-between">
     <div>
       <h3 className="font-medium">{title}</h3>
       <p className="text-sm text-neutral-600">{description}</p>
     </div>
     <label className="relative inline-flex items-center cursor-pointer">
-      <input type="checkbox" className="sr-only peer" defaultChecked={defaultChecked} />
+      <input 
+        type="checkbox" 
+        className="sr-only peer" 
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
       <div className="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
     </label>
   </div>
@@ -584,58 +775,115 @@ const LoginHistoryItem = ({ device, location, time, current }: LoginHistoryItemP
   </div>
 );
 
-const ExportSection = () => (
-  <div className="space-y-6">
-    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <h2 className="text-lg font-semibold mb-4">Export Your Data</h2>
-      
-      <p className="text-neutral-700 mb-6">
-        Download a copy of your personal data. This includes your profile information,
-        conversation history, progress data, and preferences.
-      </p>
-      
-      <div className="space-y-4">
-        <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
-          <div className="flex items-center gap-3">
-            <Download size={24} className="text-primary-500" />
-            <div>
-              <h3 className="font-medium">Complete Data Export</h3>
-              <p className="text-sm text-neutral-600">All your data in JSON format</p>
+const ExportSection = () => {
+  const [isExporting, setIsExporting] = useState<string | null>(null);
+
+  const handleExport = async (type: 'complete' | 'progress' | 'conversations') => {
+    setIsExporting(type);
+    try {
+      // Simulate export process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log(`Exporting ${type} data...`);
+      // Here you would trigger the actual export
+    } catch (error) {
+      console.error('Export failed:', error);
+    } finally {
+      setIsExporting(null);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h2 className="text-lg font-semibold mb-4">Export Your Data</h2>
+        
+        <p className="text-neutral-700 mb-6">
+          Download a copy of your personal data. This includes your profile information,
+          conversation history, progress data, and preferences.
+        </p>
+        
+        <div className="space-y-4">
+          <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Download size={24} className="text-primary-500" />
+              <div>
+                <h3 className="font-medium">Complete Data Export</h3>
+                <p className="text-sm text-neutral-600">All your data in JSON format</p>
+              </div>
             </div>
+            <button 
+              className="btn btn-primary"
+              onClick={() => handleExport('complete')}
+              disabled={isExporting === 'complete'}
+            >
+              {isExporting === 'complete' ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  Exporting...
+                </>
+              ) : (
+                'Export'
+              )}
+            </button>
           </div>
-          <button className="btn btn-primary">Export</button>
+          
+          <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Download size={24} className="text-primary-500" />
+              <div>
+                <h3 className="font-medium">Progress Report</h3>
+                <p className="text-sm text-neutral-600">Your wellness journey data</p>
+              </div>
+            </div>
+            <button 
+              className="btn btn-primary"
+              onClick={() => handleExport('progress')}
+              disabled={isExporting === 'progress'}
+            >
+              {isExporting === 'progress' ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  Exporting...
+                </>
+              ) : (
+                'Export'
+              )}
+            </button>
+          </div>
+          
+          <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Download size={24} className="text-primary-500" />
+              <div>
+                <h3 className="font-medium">Conversation History</h3>
+                <p className="text-sm text-neutral-600">Your chat logs and interactions</p>
+              </div>
+            </div>
+            <button 
+              className="btn btn-primary"
+              onClick={() => handleExport('conversations')}
+              disabled={isExporting === 'conversations'}
+            >
+              {isExporting === 'conversations' ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  Exporting...
+                </>
+              ) : (
+                'Export'
+              )}
+            </button>
+          </div>
         </div>
         
-        <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
-          <div className="flex items-center gap-3">
-            <Download size={24} className="text-primary-500" />
-            <div>
-              <h3 className="font-medium">Progress Report</h3>
-              <p className="text-sm text-neutral-600">Your wellness journey data</p>
-            </div>
-          </div>
-          <button className="btn btn-primary">Export</button>
-        </div>
-        
-        <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
-          <div className="flex items-center gap-3">
-            <Download size={24} className="text-primary-500" />
-            <div>
-              <h3 className="font-medium">Conversation History</h3>
-              <p className="text-sm text-neutral-600">Your chat logs and interactions</p>
-            </div>
-          </div>
-          <button className="btn btn-primary">Export</button>
-        </div>
+        <p className="text-sm text-neutral-600 mt-6">
+          Exports are provided in JSON format and may take a few minutes to generate.
+          You'll receive an email when your export is ready to download.
+        </p>
       </div>
-      
-      <p className="text-sm text-neutral-600 mt-6">
-        Exports are provided in JSON format and may take a few minutes to generate.
-        You'll receive an email when your export is ready to download.
-      </p>
     </div>
-  </div>
-);
+  );
+};
 
 const DeleteSection = () => (
   <div className="space-y-6">

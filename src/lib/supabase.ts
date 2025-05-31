@@ -11,11 +11,13 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export type Profile = {
   id: string;
-  username: string;
-  email: string;
+  username?: string;
   full_name?: string;
   avatar_url?: string;
+  phone?: string;
+  timezone?: string;
   created_at: string;
+  updated_at: string;
 };
 
 export type MoodEntry = {
