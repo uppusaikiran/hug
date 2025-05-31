@@ -9,8 +9,8 @@ interface ModelSelectorProps {
 }
 
 const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSelectorProps) => {
-  // Ensure modelInfo has an entry for every model type defined in perplexity.ts
-  const modelInfo: Record<ModelType, { name: string; description: string }> = {
+  // First define the base model info for known models
+  const baseModelInfo: Record<ModelType, { name: string; description: string }> = {
     mistral: {
       name: 'Mistral-7B',
       description: 'Fast and efficient for general conversations'
@@ -26,11 +26,15 @@ const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSele
     sonar: {
       name: 'Sonar Small',
       description: 'Optimized for natural chat interactions'
-    },
-    // Add a safe fallback for any model type that might be in models but not explicitly defined
+    }
+  };
+
+  // Then create the final modelInfo by combining base info with any additional models
+  const modelInfo = {
+    ...baseModelInfo,
     ...Object.fromEntries(
       Object.keys(models)
-        .filter(key => !(key in modelInfo))
+        .filter(key => !(key in baseModelInfo))
         .map(key => [key, {
           name: key.charAt(0).toUpperCase() + key.slice(1),
           description: 'AI language model'
