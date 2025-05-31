@@ -21,6 +21,24 @@ BEGIN
                    WHERE table_name = 'profiles' AND column_name = 'timezone') THEN
         ALTER TABLE profiles ADD COLUMN timezone TEXT DEFAULT 'America/Los_Angeles';
     END IF;
+    
+    -- Add notification_settings column if it doesn't exist
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
+                   WHERE table_name = 'profiles' AND column_name = 'notification_settings') THEN
+        ALTER TABLE profiles ADD COLUMN notification_settings JSONB DEFAULT '{
+          "checkin_reminders": true,
+          "challenge_updates": true,
+          "meditation_reminders": true,
+          "community_activity": false,
+          "resource_recommendations": true,
+          "weekend_different_schedule": false,
+          "quiet_hours_start": "22:00",
+          "quiet_hours_end": "08:00",
+          "browser_notifications_enabled": false,
+          "email_notifications_enabled": true,
+          "push_notifications_enabled": false
+        }'::jsonb;
+    END IF;
 END $$;
 
 -- Drop existing conflicting policies if they exist
@@ -48,13 +66,26 @@ CREATE POLICY "Users can update own profile"
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, username, full_name, phone, timezone)
+  INSERT INTO public.profiles (id, username, full_name, phone, timezone, notification_settings)
   VALUES (
     new.id, 
     new.email, 
     COALESCE(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
     '',
-    'America/Los_Angeles'
+    'America/Los_Angeles',
+    '{
+      "checkin_reminders": true,
+      "challenge_updates": true,
+      "meditation_reminders": true,
+      "community_activity": false,
+      "resource_recommendations": true,
+      "weekend_different_schedule": false,
+      "quiet_hours_start": "22:00",
+      "quiet_hours_end": "08:00",
+      "browser_notifications_enabled": false,
+      "email_notifications_enabled": true,
+      "push_notifications_enabled": false
+    }'::jsonb
   );
   RETURN new;
 END;
@@ -111,10 +142,34 @@ ORDER BY ordinal_position;
 
 ## Expected Behavior After Fix
 
+### Profile Section
 - ✅ Profile page loads without errors
 - ✅ Users can edit their name, phone, and timezone
 - ✅ Changes are saved to the database
 - ✅ New users automatically get a profile created
+
+### Notification System
+- ✅ Browser notification permission requests work
+- ✅ Notification settings are persisted to database
+- ✅ Real-time notification settings changes
+- ✅ Test notifications work
+- ✅ Quiet hours are respected
+- ✅ Scheduled daily reminders (9 AM & 7 PM check-ins)
+- ✅ Meditation reminders (8 AM, 12:30 PM, 8 PM)
+- ✅ Weekly progress reminders (Mondays at 10 AM)
+
+### All Profile Sections
 - ✅ All profile sections are functional
+- ✅ Settings are saved and loaded properly
+- ✅ Real user data is displayed everywhere
+
+## Testing Notifications
+
+1. Go to Profile → Notifications tab
+2. Click "Enable" for browser notifications 
+3. Grant permission when prompted
+4. Click "Test" to verify notifications work
+5. Adjust quiet hours and other settings
+6. All changes save automatically
 
 If you still see errors after running these steps, please share the specific error messages and I'll help debug further. 

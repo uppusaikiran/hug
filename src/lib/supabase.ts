@@ -9,6 +9,20 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+export type NotificationSettings = {
+  checkin_reminders: boolean;
+  challenge_updates: boolean;
+  meditation_reminders: boolean;
+  community_activity: boolean;
+  resource_recommendations: boolean;
+  weekend_different_schedule: boolean;
+  quiet_hours_start: string;
+  quiet_hours_end: string;
+  browser_notifications_enabled: boolean;
+  email_notifications_enabled: boolean;
+  push_notifications_enabled: boolean;
+};
+
 export type Profile = {
   id: string;
   username?: string;
@@ -16,6 +30,7 @@ export type Profile = {
   avatar_url?: string;
   phone?: string;
   timezone?: string;
+  notification_settings?: NotificationSettings;
   created_at: string;
   updated_at: string;
 };

@@ -11,10 +11,14 @@ import {
   ChevronRight,
   Edit2,
   Loader2,
-  Save
+  Save,
+  TestTube,
+  AlertTriangle,
+  CheckCircle
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
+import { useNotifications } from '../hooks/useNotifications';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -433,36 +437,68 @@ const PreferencesSection = () => (
 );
 
 const NotificationsSection = () => {
-  const [notifications, setNotifications] = useState({
-    checkinReminders: true,
-    challengeUpdates: true,
-    meditationReminders: true,
-    communityActivity: false,
-    resourceRecommendations: true,
-    weekendDifferentSchedule: false,
-  });
-  const [quietHours, setQuietHours] = useState({
-    start: '22:00',
-    end: '08:00',
-  });
+  const { 
+    settings, 
+    loading, 
+    error, 
+    permissionStatus, 
+    updateNotificationSettings, 
+    requestBrowserPermission,
+    testNotification 
+  } = useNotifications();
   const [isSaving, setIsSaving] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleNotificationChange = (key: string, value: boolean) => {
-    setNotifications(prev => ({ ...prev, [key]: value }));
-  };
-
-  const handleSave = async () => {
-    setIsSaving(true);
+  const handleNotificationChange = async (key: keyof typeof settings, value: boolean | string) => {
     try {
-      // Here you would save to your backend/localStorage
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      console.log('Notifications saved:', { notifications, quietHours });
+      setIsSaving(true);
+      await updateNotificationSettings({ [key]: value });
+      setSuccessMessage('Settings saved successfully!');
+      setTimeout(() => setSuccessMessage(null), 3000);
     } catch (error) {
-      console.error('Failed to save notifications:', error);
+      console.error('Failed to save notification setting:', error);
     } finally {
       setIsSaving(false);
     }
   };
+
+  const handleEnableBrowserNotifications = async () => {
+    try {
+      setIsSaving(true);
+      await requestBrowserPermission();
+      setSuccessMessage('Browser notifications enabled!');
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (error) {
+      console.error('Failed to enable notifications:', error);
+      alert(error instanceof Error ? error.message : 'Failed to enable notifications');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleTestNotification = () => {
+    testNotification();
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary-500 mx-auto mb-4" />
+          <p className="text-neutral-600">Loading notification settings...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-error-50 border border-error-200 rounded-lg p-6">
+        <h3 className="text-error-800 font-medium mb-2">Unable to load notification settings</h3>
+        <p className="text-error-600 text-sm">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -473,36 +509,36 @@ const NotificationsSection = () => {
           <NotificationSetting 
             title="Check-in Reminders"
             description="Daily reminders to track your mood"
-            checked={notifications.checkinReminders}
-            onChange={(value) => handleNotificationChange('checkinReminders', value)}
+            checked={settings.checkin_reminders}
+            onChange={(value) => handleNotificationChange('checkin_reminders', value)}
           />
           
           <NotificationSetting 
             title="Challenge Updates"
             description="Updates about your active challenges"
-            checked={notifications.challengeUpdates}
-            onChange={(value) => handleNotificationChange('challengeUpdates', value)}
+            checked={settings.challenge_updates}
+            onChange={(value) => handleNotificationChange('challenge_updates', value)}
           />
           
           <NotificationSetting 
             title="Meditation Reminders"
             description="Reminders for scheduled meditation sessions"
-            checked={notifications.meditationReminders}
-            onChange={(value) => handleNotificationChange('meditationReminders', value)}
+            checked={settings.meditation_reminders}
+            onChange={(value) => handleNotificationChange('meditation_reminders', value)}
           />
           
           <NotificationSetting 
             title="Community Activity"
             description="Updates from your support community"
-            checked={notifications.communityActivity}
-            onChange={(value) => handleNotificationChange('communityActivity', value)}
+            checked={settings.community_activity}
+            onChange={(value) => handleNotificationChange('community_activity', value)}
           />
           
           <NotificationSetting 
             title="Resource Recommendations"
             description="Personalized mental health resources"
-            checked={notifications.resourceRecommendations}
-            onChange={(value) => handleNotificationChange('resourceRecommendations', value)}
+            checked={settings.resource_recommendations}
+            onChange={(value) => handleNotificationChange('resource_recommendations', value)}
           />
         </div>
       </div>
@@ -518,8 +554,8 @@ const NotificationsSection = () => {
             <input 
               type="time" 
               className="input" 
-              value={quietHours.start}
-              onChange={(e) => setQuietHours(prev => ({ ...prev, start: e.target.value }))}
+              value={settings.quiet_hours_start}
+              onChange={(e) => handleNotificationChange('quiet_hours_start', e.target.value)}
             />
           </div>
           
@@ -530,41 +566,81 @@ const NotificationsSection = () => {
             <input 
               type="time" 
               className="input" 
-              value={quietHours.end}
-              onChange={(e) => setQuietHours(prev => ({ ...prev, end: e.target.value }))}
+              value={settings.quiet_hours_end}
+              onChange={(e) => handleNotificationChange('quiet_hours_end', e.target.value)}
             />
           </div>
           
           <NotificationSetting 
             title="Weekend Different Schedule"
             description="Use different quiet hours on weekends"
-            checked={notifications.weekendDifferentSchedule}
-            onChange={(value) => handleNotificationChange('weekendDifferentSchedule', value)}
+            checked={settings.weekend_different_schedule}
+            onChange={(value) => handleNotificationChange('weekend_different_schedule', value)}
           />
         </div>
       </div>
 
+      {/* Browser Notification Controls */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-        <div className="flex justify-end">
-          <button 
-            className="btn btn-primary"
-            onClick={handleSave}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                Saving...
-              </>
-            ) : (
-              <>
-                <Save className="h-4 w-4 mr-2" />
-                Save Preferences
-              </>
-            )}
-          </button>
+        <h2 className="text-lg font-semibold mb-4">Browser Notifications</h2>
+        
+        <div className="space-y-4">
+          <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Bell size={24} className={`${permissionStatus === 'granted' ? 'text-green-500' : 'text-neutral-400'}`} />
+              <div>
+                <h3 className="font-medium">Browser Notifications</h3>
+                <p className="text-sm text-neutral-600">
+                  {permissionStatus === 'granted' ? 'Enabled and ready' : 
+                   permissionStatus === 'denied' ? 'Blocked - check browser settings' :
+                   'Not enabled yet'}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {permissionStatus !== 'granted' && (
+                <button 
+                  className="btn btn-primary"
+                  onClick={handleEnableBrowserNotifications}
+                  disabled={isSaving || permissionStatus === 'denied'}
+                >
+                  {isSaving ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    'Enable'
+                  )}
+                </button>
+              )}
+              {permissionStatus === 'granted' && (
+                <button 
+                  className="btn btn-ghost"
+                  onClick={handleTestNotification}
+                >
+                  <TestTube className="h-4 w-4 mr-2" />
+                  Test
+                </button>
+              )}
+            </div>
+          </div>
+          
+          <NotificationSetting 
+            title="Email Notifications"
+            description="Receive notifications via email"
+            checked={settings.email_notifications_enabled}
+            onChange={(value) => handleNotificationChange('email_notifications_enabled', value)}
+          />
         </div>
       </div>
+
+      {/* Success Message */}
+      {successMessage && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-green-600" />
+            <p className="text-green-800">{successMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

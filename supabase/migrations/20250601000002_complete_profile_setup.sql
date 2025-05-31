@@ -12,6 +12,24 @@ BEGIN
                    WHERE table_name = 'profiles' AND column_name = 'timezone') THEN
         ALTER TABLE profiles ADD COLUMN timezone TEXT DEFAULT 'America/Los_Angeles';
     END IF;
+    
+    -- Add notification_settings column if it doesn't exist
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns 
+                   WHERE table_name = 'profiles' AND column_name = 'notification_settings') THEN
+        ALTER TABLE profiles ADD COLUMN notification_settings JSONB DEFAULT '{
+          "checkin_reminders": true,
+          "challenge_updates": true,
+          "meditation_reminders": true,
+          "community_activity": false,
+          "resource_recommendations": true,
+          "weekend_different_schedule": false,
+          "quiet_hours_start": "22:00",
+          "quiet_hours_end": "08:00",
+          "browser_notifications_enabled": false,
+          "email_notifications_enabled": true,
+          "push_notifications_enabled": false
+        }'::jsonb;
+    END IF;
 END $$;
 
 -- Drop existing conflicting policies if they exist
@@ -39,13 +57,26 @@ CREATE POLICY "Users can update own profile"
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, username, full_name, phone, timezone)
+  INSERT INTO public.profiles (id, username, full_name, phone, timezone, notification_settings)
   VALUES (
     new.id, 
     new.email, 
     COALESCE(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
     '',
-    'America/Los_Angeles'
+    'America/Los_Angeles',
+    '{
+      "checkin_reminders": true,
+      "challenge_updates": true,
+      "meditation_reminders": true,
+      "community_activity": false,
+      "resource_recommendations": true,
+      "weekend_different_schedule": false,
+      "quiet_hours_start": "22:00",
+      "quiet_hours_end": "08:00",
+      "browser_notifications_enabled": false,
+      "email_notifications_enabled": true,
+      "push_notifications_enabled": false
+    }'::jsonb
   );
   RETURN new;
 END;
