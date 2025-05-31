@@ -1,5 +1,3 @@
-import { PerplexityAI } from 'pplx-api';
-
 export const models = {
   mistral: 'mistral-7b-instruct',
   codellama: 'codellama-34b-instruct',
@@ -10,35 +8,16 @@ export const models = {
 export type ModelType = keyof typeof models;
 
 class PerplexityClient {
-  private client: PerplexityAI | null = null;
+  private client: null = null;
   private defaultModel: ModelType = 'sonar';
 
   constructor() {
-    const apiKey = import.meta.env.VITE_PERPLEXITY_API_KEY;
-    if (apiKey) {
-      this.client = new PerplexityAI({ apiKey });
-    }
+    // Initialize client as null since we're removing the Perplexity API integration
+    this.client = null;
   }
 
   async chat(message: string, model?: ModelType): Promise<string> {
-    if (!this.client) {
-      return this.getFallbackResponse(message);
-    }
-
-    try {
-      const response = await this.client.chat({
-        model: models[model || this.defaultModel],
-        messages: [{
-          role: 'user',
-          content: message
-        }]
-      });
-
-      return response.choices[0].message.content;
-    } catch (error) {
-      console.error('Perplexity API error:', error);
-      return this.getFallbackResponse(message);
-    }
+    return this.getFallbackResponse(message);
   }
 
   private getFallbackResponse(message: string): string {
@@ -54,7 +33,7 @@ class PerplexityClient {
   }
 
   isConfigured(): boolean {
-    return this.client !== null;
+    return false;
   }
 }
 
