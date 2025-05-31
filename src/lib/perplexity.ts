@@ -19,6 +19,8 @@ export const models = {
   mixtral: "mixtral-8x7b-instruct",
 };
 
+export type ModelType = keyof typeof models;
+
 export class PerplexityClient {
   private apiKey: string | undefined;
   private model: string;
@@ -85,3 +87,5 @@ export class PerplexityClient {
     return responses[index];
   }
 }
+
+export const perplexityClient = new PerplexityClient();
