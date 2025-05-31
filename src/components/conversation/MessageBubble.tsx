@@ -56,7 +56,7 @@ const MessageBubble = ({ message, isSpeaking }: MessageBubbleProps) => {
           
           <div>
             <div 
-              className={`prose ${isAI ? 'text-neutral-900' : 'text-white'} max-w-none`}
+              className={`prose prose-sm ${isAI ? 'text-neutral-900' : 'text-white prose-invert'} max-w-none`}
               dangerouslySetInnerHTML={{ __html: message.text }}
             />
             <p className={`text-xs mt-1 ${isAI ? 'text-neutral-500' : 'text-primary-200'}`}>

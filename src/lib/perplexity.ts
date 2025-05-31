@@ -95,29 +95,87 @@ export class PerplexityClient {
 
   private formatResponse(response: PerplexityResponse): string {
     let formattedText = response.choices[0].message.content;
+    const citations: string[] = [];
 
     // Add citations and search results if available
     if (response.citations?.length || response.search_results?.length) {
-      formattedText += '\n\n---\n\n**Sources:**\n\n';
+      formattedText += '\n\n---\n\n### Sources\n\n';
       
-      // Format citations as markdown links
+      // Format citations with clickable links
       if (response.citations?.length) {
         response.citations.forEach((citation, index) => {
-          formattedText += `[${index + 1}] ${citation}\n`;
+          const citationId = `citation-${index + 1}`;
+          // Add citation reference in text
+          formattedText = formattedText.replace(`[${index + 1}]`, `<a href="#${citationId}" class="citation-link">[${index + 1}]</a>`);
+          // Add citation to list
+          citations.push(`<div id="${citationId}" class="citation-item">[${index + 1}] ${citation}</div>`);
         });
       }
 
-      // Format search results as markdown links
+      // Format search results as clickable links
       if (response.search_results?.length) {
         response.search_results.forEach(result => {
           const date = result.date ? ` (${result.date})` : '';
-          formattedText += `- [${result.title}](${result.url})${date}\n`;
+          citations.push(`<div class="search-result">
+            <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="search-link">
+              ${result.title}${date}
+              <svg class="external-link" viewBox="0 0 24 24" width="12" height="12">
+                <path fill="currentColor" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>`);
         });
+      }
+
+      // Add citations to the end
+      if (citations.length > 0) {
+        formattedText += citations.join('\n');
       }
     }
 
+    // Add custom styles for citations
+    formattedText = `
+      <style>
+        .citation-link {
+          color: #6366f1;
+          text-decoration: none;
+          font-weight: 500;
+        }
+        .citation-link:hover {
+          text-decoration: underline;
+        }
+        .citation-item {
+          margin: 0.5rem 0;
+          padding: 0.5rem;
+          background: #f3f4f6;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+        }
+        .search-result {
+          margin: 0.5rem 0;
+        }
+        .search-link {
+          color: #6366f1;
+          text-decoration: none;
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .search-link:hover {
+          text-decoration: underline;
+        }
+        .external-link {
+          opacity: 0.5;
+        }
+      </style>
+      ${formattedText}
+    `;
+
     // Convert markdown to HTML
-    return marked(formattedText);
+    return marked(formattedText, { mangle: false, headerIds: false });
   }
 
   isConfigured(): boolean {
