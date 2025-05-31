@@ -1,8 +1,8 @@
-# Solace - AI Mental Health Companion
+# HUG - AI Mental Health Companion
 
-![Solace](public/hug.png)
+<img src="public/hug.png" alt="HUG" width="100" height="100">
 
-Solace (formerly HUG) is a revolutionary AI-powered mental health companion that provides 24/7 empathetic support, crisis intervention, and personalized wellness guidance. Built with cutting-edge AI technology, Solace offers a safe space for users to explore their mental wellbeing through natural conversations and guided activities.
+HUG is a revolutionary AI-powered mental health companion that provides 24/7 empathetic support, crisis intervention, and personalized wellness guidance. Built with cutting-edge AI technology, HUG offers a safe space for users to explore their mental wellbeing through natural conversations and guided activities.
 
 ## 🌟 Features
 
