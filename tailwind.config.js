@@ -70,50 +70,6 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Lexend', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'breathe': 'breathe 8s infinite ease-in-out',
-        'pulse-subtle': 'pulse-subtle 3s infinite ease-in-out',
-        'wave': 'wave 1.5s infinite ease-in-out',
-        'float': 'float 6s infinite ease-in-out',
-        'shimmer': 'shimmer 2s infinite',
-        'glow': 'glow 3s infinite ease-in-out',
-        'gradient': 'gradient-shift 8s ease infinite',
-        'bounce-slow': 'bounce 3s infinite',
-        'spin-slow': 'spin 3s linear infinite',
-      },
-      keyframes: {
-        wave: {
-          '0%': { transform: 'scaleY(0.2)' },
-          '50%': { transform: 'scaleY(1)' },
-          '100%': { transform: 'scaleY(0.2)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        },
-        glow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(var(--color-primary-500), 0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(var(--color-primary-500), 0.6)' },
-        },
-        'gradient-shift': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
-      },
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        'xl': '1rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem',
-      },
       typography: {
         DEFAULT: {
           css: {
