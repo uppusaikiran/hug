@@ -9,8 +9,11 @@ import {
   Meh,
   Volume2,
   AlertCircle,
-  Heart
+  Heart,
+  Brain
 } from 'lucide-react';
+import ModelSelector from '../components/conversation/ModelSelector';
+import { perplexityClient, ModelType } from '../lib/perplexity';
 
 interface Message {
   id: string;
@@ -32,15 +35,15 @@ const ConversationPage = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showMoodSelector, setShowMoodSelector] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<ModelType>('sonar');
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
-  // Auto-scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
   
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!input.trim()) return;
     
     // Add user message
@@ -54,29 +57,28 @@ const ConversationPage = () => {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     
-    // Simulate AI thinking
-    setTimeout(() => {
-      // Add AI response
+    // Get AI response
+    setIsSpeaking(true);
+    try {
+      const response = await perplexityClient.chat(input, selectedModel);
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: getAIResponse(input),
+        text: response,
         sender: 'ai',
         timestamp: new Date()
       };
-      
       setMessages(prev => [...prev, aiMessage]);
-      // Simulate AI speaking
-      setIsSpeaking(true);
-      setTimeout(() => setIsSpeaking(false), 3000);
-    }, 1000);
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+    } finally {
+      setIsSpeaking(false);
+    }
   };
   
   const toggleRecording = () => {
     setIsRecording(!isRecording);
     
-    // If starting recording
     if (!isRecording) {
-      // Simulate recording for 5 seconds then automatically send
       setTimeout(() => {
         setIsRecording(false);
         setInput("I've been feeling a bit anxious lately.");
@@ -94,37 +96,17 @@ const ConversationPage = () => {
       handleSendMessage();
     }
   };
-  
-  // Simple placeholder AI responses
-  const getAIResponse = (userInput: string) => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('anxious') || input.includes('anxiety')) {
-      return "I understand feeling anxious can be difficult. Would you like to try a quick breathing exercise to help calm your mind? Or we could talk more about what's causing your anxiety.";
-    } else if (input.includes('sad') || input.includes('depressed')) {
-      return "I'm sorry to hear you're feeling down. Remember that it's okay to not be okay sometimes. Would you like to explore some mood-lifting activities, or would you prefer to talk about what's making you feel this way?";
-    } else if (input.includes('happy') || input.includes('good')) {
-      return "I'm glad to hear you're doing well! It's wonderful to acknowledge positive feelings. Would you like to build on this positive mood with a gratitude exercise?";
-    } else {
-      return "Thank you for sharing that with me. How long have you been feeling this way? I'm here to listen and support you however I can.";
-    }
-  };
-  
-  const handleMoodSelection = (mood: string) => {
-    setShowMoodSelector(false);
-    setInput(`I'm feeling ${mood} today`);
-    
-    // Auto-send after a short delay
-    setTimeout(() => {
-      handleSendMessage();
-    }, 500);
-  };
-  
+
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col">
       <div className="bg-white p-4 border-b border-neutral-200 flex justify-between items-center">
         <h1 className="text-xl font-semibold">Conversation</h1>
         <div className="flex items-center gap-3">
+          <ModelSelector 
+            selectedModel={selectedModel}
+            onModelChange={setSelectedModel}
+            isConfigured={perplexityClient.isConfigured()}
+          />
           <button 
             className="p-2 text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors flex items-center gap-1"
             onClick={() => setShowMoodSelector(!showMoodSelector)}
@@ -286,5 +268,10 @@ const MoodButton = ({ mood, icon, onClick }: MoodButtonProps) => (
     <span className="text-sm mt-1 text-neutral-700 capitalize">{mood}</span>
   </button>
 );
+
+const handleMoodSelection = (mood: string) => {
+  // Handle mood selection logic
+  console.log('Selected mood:', mood);
+};
 
 export default ConversationPage;
