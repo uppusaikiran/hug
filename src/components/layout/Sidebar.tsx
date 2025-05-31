@@ -39,12 +39,10 @@ const Sidebar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -95,7 +93,7 @@ const Sidebar = () => {
       >
         <div className="p-4 border-b border-neutral-200">
           <div className="flex items-center gap-2">
-            <Heart className="h-6 w-6 text-primary-500" />
+            <img src="/hug.png" alt="HUG" className="h-8 w-8" />
             <span className="text-xl font-display font-bold text-primary-800">HUG</span>
           </div>
         </div>
@@ -135,7 +133,7 @@ const Sidebar = () => {
           >
             <div className="p-4 border-b border-neutral-200 mt-16">
               <div className="flex items-center gap-2">
-                <Heart className="h-6 w-6 text-primary-500" />
+                <img src="/hug.png" alt="HUG" className="h-8 w-8" />
                 <span className="text-xl font-display font-bold text-primary-800">HUG</span>
               </div>
               {user && (
