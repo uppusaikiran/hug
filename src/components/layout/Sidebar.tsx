@@ -32,42 +32,16 @@ const Sidebar = () => {
     { to: "/profile", icon: <User size={20} />, label: "Profile" }
   ];
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
-  const handleLogout = async () => {
-    await signOut();
-    setIsMobileMenuOpen(false);
-  };
-
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
 
   return (
     <>
       {/* Mobile Menu Button */}
       <button
-        onClick={toggleMobileMenu}
-        className="md:hidden fixed top-4 left-4 z-50 p-3 bg-white rounded-xl shadow-lg border border-neutral-200 touch-target hover:bg-neutral-50 transition-colors"
-        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="md:hidden fixed top-4 left-4 z-50 p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-primary-100 hover:bg-primary-50 transition-colors"
       >
         <motion.div
           animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
@@ -84,7 +58,7 @@ const Sidebar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={closeMobileMenu}
+            onClick={() => setIsMobileMenuOpen(false)}
             className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
           />
         )}
@@ -92,15 +66,22 @@ const Sidebar = () => {
 
       {/* Desktop Sidebar */}
       <motion.aside 
-        className="hidden md:flex flex-col w-64 bg-white border-r border-neutral-200"
+        className="hidden md:flex flex-col h-full"
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="p-4 border-b border-neutral-200">
+        <div className="p-4 border-b border-white/20 bg-gradient-to-r from-primary-50/50 to-accent-50/50">
           <div className="flex items-center gap-2">
-            <img src="/hug.png" alt="huggy" className="h-8 w-8" />
-            <span className="text-xl font-display font-bold text-primary-800">huggy</span>
+            <motion.div 
+              className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center shadow-lg"
+              whileHover={{ rotate: 5 }}
+            >
+              <Heart className="h-5 w-5 text-white" />
+            </motion.div>
+            <span className="text-xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+              huggy
+            </span>
           </div>
         </div>
         
@@ -116,18 +97,18 @@ const Sidebar = () => {
           ))}
         </nav>
         
-        <div className="p-4 border-t border-neutral-200 space-y-3">
+        <div className="p-4 border-t border-white/20 space-y-3 bg-gradient-to-r from-primary-50/50 to-accent-50/50">
           <Link 
             to="/crisis" 
-            className="w-full py-3 px-4 bg-error-500 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-error-600 transition-colors touch-target font-medium"
+            className="w-full py-3 px-4 bg-error-500 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-error-600 transition-colors shadow-lg"
           >
             <Activity size={18} />
             <span>Crisis Support</span>
           </Link>
           
           <button
-            onClick={handleLogout}
-            className="w-full py-3 px-4 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 rounded-lg flex items-center justify-center gap-2 transition-colors touch-target font-medium border border-neutral-300"
+            onClick={signOut}
+            className="w-full py-3 px-4 bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-neutral-100 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg border border-neutral-200"
           >
             <LogOut size={18} />
             <span>Sign Out</span>
@@ -143,12 +124,19 @@ const Sidebar = () => {
             animate={{ x: 0 }}
             exit={{ x: -300 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="md:hidden fixed left-0 top-0 bottom-0 w-72 bg-white border-r border-neutral-200 z-50 shadow-xl safe-area-top safe-area-bottom"
+            className="md:hidden fixed left-0 top-0 bottom-0 w-72 bg-gradient-to-br from-white/90 to-primary-50/90 backdrop-blur-md border-r border-white/20 z-50 shadow-xl"
           >
-            <div className="p-4 border-b border-neutral-200 mt-16">
+            <div className="p-4 border-b border-white/20 mt-16">
               <div className="flex items-center gap-2">
-                              <img src="/hug.png" alt="huggy" className="h-8 w-8" />
-              <span className="text-xl font-display font-bold text-primary-800">huggy</span>
+                <motion.div 
+                  className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center"
+                  whileHover={{ rotate: 5 }}
+                >
+                  <Heart className="h-5 w-5 text-white" />
+                </motion.div>
+                <span className="text-xl font-display font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                  huggy
+                </span>
               </div>
               {user && (
                 <p className="text-sm text-neutral-600 mt-2">
@@ -165,25 +153,25 @@ const Sidebar = () => {
                   icon={item.icon} 
                   label={item.label} 
                   currentPath={location.pathname}
-                  onClick={closeMobileMenu}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   isMobile={true}
                 />
               ))}
             </nav>
             
-            <div className="p-4 border-t border-neutral-200 space-y-3">
+            <div className="p-4 border-t border-white/20 space-y-3">
               <Link 
                 to="/crisis" 
-                onClick={closeMobileMenu}
-                className="w-full py-3 px-4 bg-error-500 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-error-600 transition-colors touch-target font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full py-3 px-4 bg-error-500 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-error-600 transition-colors shadow-lg"
               >
                 <Activity size={18} />
                 <span>Crisis Support</span>
               </Link>
               
               <button
-                onClick={handleLogout}
-                className="w-full py-3 px-4 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 rounded-lg flex items-center justify-center gap-2 transition-colors touch-target font-medium border border-neutral-300"
+                onClick={signOut}
+                className="w-full py-3 px-4 bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-neutral-100 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg border border-neutral-200"
               >
                 <LogOut size={18} />
                 <span>Sign Out</span>
@@ -212,16 +200,16 @@ const NavLink = ({ to, icon, label, currentPath, onClick, isMobile = false }: Na
     <Link 
       to={to} 
       onClick={onClick}
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors relative touch-target ${
+      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all relative ${
         isActive 
-          ? 'text-primary-800 font-medium bg-primary-50 border border-primary-200' 
-          : 'text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100'
+          ? 'bg-gradient-to-r from-primary-100/80 to-accent-100/80 text-primary-800 font-medium shadow-lg border border-primary-200/50' 
+          : 'text-neutral-700 hover:text-neutral-900 hover:bg-white/50'
       } ${isMobile ? 'text-base' : ''}`}
     >
       {isActive && (
         <motion.div 
           layoutId={isMobile ? "activeMobileNavIndicator" : "activeNavIndicator"}
-          className="absolute left-0 top-0 bottom-0 w-1 bg-primary-500 rounded-r-full"
+          className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-accent-500 rounded-r-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}

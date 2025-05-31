@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { 
   LogOut, 
-  Settings,
+  Settings, 
   Heart,
   Activity,
   Sparkles
@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg relative z-20 overflow-hidden">
+    <header className="relative z-20 overflow-hidden">
       {/* Floating caring emotions */}
       <FloatingEmotion emotion="love" delay={0} className="top-2 left-10" />
       <FloatingEmotion emotion="comfort" delay={2} className="top-1 right-20" />
@@ -34,7 +34,7 @@ const Navbar = () => {
           {/* Direct Logout Button for better visibility */}
           <motion.button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-all duration-200 border border-red-200 hover:border-red-300"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 bg-red-50/80 backdrop-blur-sm hover:bg-red-100 rounded-lg transition-all duration-200 border border-red-200 hover:border-red-300 shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -47,13 +47,13 @@ const Navbar = () => {
             {/* User Menu */}
             <div className="relative">
               <button 
-                className="flex items-center gap-2 p-2 rounded-xl hover:bg-white/50 backdrop-blur-md transition-all duration-300 shadow-lg hover:shadow-xl touch-target"
+                className="flex items-center gap-2 p-2 rounded-xl bg-white/80 hover:bg-primary-50/80 backdrop-blur-md transition-all duration-300 shadow-lg hover:shadow-xl border border-white/20"
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 aria-label="User menu"
               >
                 <HeartbeatAnimation intensity="gentle">
                   <motion.div 
-                    className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white flex items-center justify-center font-medium text-sm shadow-lg relative"
+                    className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gradient-to-br from-primary-500 via-accent-500 to-secondary-500 text-white flex items-center justify-center font-medium text-sm shadow-lg relative"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -133,7 +133,7 @@ const Navbar = () => {
                       <div className="border-t border-neutral-200 my-1"></div>
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors touch-target"
+                        className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
                       >
                         <LogOut className="h-4 w-4" />
                         Sign Out
@@ -161,7 +161,7 @@ const UserMenuItem = ({ icon, label, to, onClick }: UserMenuItemProps) => (
   <Link
     to={to}
     onClick={onClick}
-    className="flex items-center gap-3 px-4 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors touch-target"
+    className="flex items-center gap-3 px-4 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors"
   >
     {icon}
     <span>{label}</span>
