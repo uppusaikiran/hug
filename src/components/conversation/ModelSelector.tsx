@@ -9,38 +9,44 @@ interface ModelSelectorProps {
 }
 
 const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSelectorProps) => {
-  const modelInfo: Record<ModelType, { name: string; description: string; maxTokens: number }> = {
+  const modelInfo = {
     'sonar-deep-research': {
       name: 'Sonar Deep Research',
-      description: 'Advanced research and analysis',
-      maxTokens: 128000
+      description: 'Best for in-depth research and analysis. Provides detailed responses with citations and comprehensive explanations.',
+      maxTokens: 128000,
+      category: 'Research'
     },
     'sonar-reasoning-pro': {
       name: 'Sonar Reasoning Pro',
-      description: 'Enhanced reasoning capabilities',
-      maxTokens: 128000
+      description: 'Enhanced reasoning capabilities with professional-grade analysis and structured thinking.',
+      maxTokens: 128000,
+      category: 'Professional'
     },
     'sonar-reasoning': {
       name: 'Sonar Reasoning',
-      description: 'Balanced reasoning and response',
-      maxTokens: 128000
+      description: 'Balanced model for general reasoning tasks and thoughtful responses.',
+      maxTokens: 128000,
+      category: 'General'
     },
     'sonar-pro': {
       name: 'Sonar Pro',
-      description: 'Professional-grade responses',
-      maxTokens: 200000
+      description: 'Professional-grade responses with higher context window. Ideal for longer conversations.',
+      maxTokens: 200000,
+      category: 'Professional'
     },
     'sonar': {
       name: 'Sonar',
-      description: 'Fast and efficient chat',
-      maxTokens: 128000
+      description: 'Fast and efficient chat model for general-purpose conversations.',
+      maxTokens: 128000,
+      category: 'General'
     },
     'r1-1776': {
       name: 'R1-1776',
-      description: 'Specialized chat model',
-      maxTokens: 128000
+      description: 'Specialized chat model optimized for natural conversations.',
+      maxTokens: 128000,
+      category: 'Specialized'
     }
-  };
+  } as const;
 
   return (
     <div className="relative">
@@ -52,11 +58,18 @@ const ModelSelector = ({ selectedModel, onModelChange, isConfigured }: ModelSele
           isConfigured ? 'border-primary-200' : 'border-neutral-200'
         } rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50`}
       >
-        {Object.entries(models).map(([key, value]) => (
-          <option key={key} value={key} title={modelInfo[key as ModelType].description}>
-            {modelInfo[key as ModelType].name} ({modelInfo[key as ModelType].maxTokens / 1000}k tokens)
-          </option>
-        ))}
+        {Object.entries(models).map(([key]) => {
+          const info = modelInfo[key as ModelType];
+          return (
+            <option 
+              key={key} 
+              value={key} 
+              title={info.description}
+            >
+              {info.name} • {info.category} • {info.maxTokens / 1000}k tokens
+            </option>
+          );
+        })}
       </select>
       <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
         <ChevronDown className="h-4 w-4 text-neutral-400" />
