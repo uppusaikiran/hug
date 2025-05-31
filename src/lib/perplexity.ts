@@ -96,6 +96,7 @@ export class PerplexityClient {
   private formatResponse(response: PerplexityResponse): string {
     let formattedText = response.choices[0].message.content;
     const citations: string[] = [];
+    const processedUrls = new Set<string>();
 
     // Add citations and search results if available
     if (response.citations?.length || response.search_results?.length) {
@@ -109,24 +110,38 @@ export class PerplexityClient {
             `[${index + 1}]`, 
             `<a href="#citation-${index + 1}" class="citation-link">[${index + 1}]</a>`
           );
-          // Add citation to list
-          citations.push(`<div id="citation-${index + 1}" class="citation-item">
-            <span class="citation-number">[${index + 1}]</span>
-            <span class="citation-text">${citation}</span>
-          </div>`);
+
+          // Only add citation if URL hasn't been processed
+          if (!processedUrls.has(citation)) {
+            processedUrls.add(citation);
+            citations.push(`<div id="citation-${index + 1}" class="citation-item">
+              <span class="citation-number">[${index + 1}]</span>
+              <a href="${citation}" target="_blank" rel="noopener noreferrer" class="citation-text hover:underline">
+                ${citation}
+              </a>
+            </div>`);
+          }
         });
       }
 
       // Format search results as clickable links
       if (response.search_results?.length) {
         response.search_results.forEach(result => {
-          const date = result.date ? ` (${result.date})` : '';
-          citations.push(`<div class="search-result">
-            <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="search-link">
-              ${result.title}${date}
-              <span class="external-link">↗</span>
-            </a>
-          </div>`);
+          // Only add result if URL hasn't been processed
+          if (!processedUrls.has(result.url)) {
+            processedUrls.add(result.url);
+            const date = result.date ? ` (${result.date})` : '';
+            citations.push(`<div class="search-result">
+              <a href="${result.url}" target="_blank" rel="noopener noreferrer" class="search-link">
+                ${result.title}${date}
+                <svg class="external-link inline-block w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>`);
+          }
         });
       }
 
