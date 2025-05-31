@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import BoltBadge from '../components/ui/BoltBadge';
 import { 
   HugWave, 
   EmotionalAura, 
@@ -106,6 +107,9 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+      {/* Bolt.new Badge */}
+      <BoltBadge variant="text" position="top-right" />
+      
       {/* Comforting Message */}
       <ComfortingMessage
         message="You're not alone. HUG is here to listen, support, and care for you. 💝"

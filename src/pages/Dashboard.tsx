@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import BoltBadge from '../components/ui/BoltBadge';
 import { 
   Heart, 
   MessageCircle,
@@ -104,6 +105,9 @@ const Dashboard = () => {
 
   return (
     <div className="py-4 sm:py-6 space-y-4 sm:space-y-6 lg:space-y-8 relative overflow-hidden">
+      {/* Bolt.new Badge */}
+      <BoltBadge variant="text" position="top-right" />
+      
       {/* Caring background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <CaringParticles particleCount={20} className="opacity-20" />
