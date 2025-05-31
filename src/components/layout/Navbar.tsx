@@ -80,20 +80,20 @@ const Navbar = () => {
               <AnimatePresence>
                 {isUserMenuOpen && (
                   <motion.div 
-                    className="absolute right-0 mt-2 w-56 sm:w-64 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 py-2 z-50"
+                    className="absolute right-0 mt-2 w-56 sm:w-64 bg-gradient-to-br from-white/90 via-primary-50/90 to-accent-50/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 py-2 z-50"
                     initial={{ opacity: 0, y: -10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
                   >
                     {/* User Info */}
-                    <div className="px-4 py-3 border-b border-neutral-200">
+                    <div className="px-4 py-3 border-b border-white/20">
                       <p className="text-sm font-medium text-neutral-900 truncate">{user?.email}</p>
                       <p className="text-xs text-neutral-500 mt-1">Your AI companion is here for you</p>
                     </div>
 
                     {/* Quick Stats */}
-                    <div className="px-4 py-3 border-b border-neutral-200">
+                    <div className="px-4 py-3 border-b border-white/20">
                       <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
                         <div>
                           <div className="text-base sm:text-lg font-bold text-primary-600">7</div>
@@ -130,7 +130,7 @@ const Navbar = () => {
                         to="/settings"
                         onClick={() => setIsUserMenuOpen(false)}
                       />
-                      <div className="border-t border-neutral-200 my-1"></div>
+                      <div className="border-t border-white/20 my-1"></div>
                       <button
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
