@@ -1,32 +1,249 @@
-/* Add to the existing CSS */
-.citation-link {
-  @apply text-primary-600 no-underline font-medium hover:underline hover:bg-primary-50 px-1 -mx-1 rounded transition-colors;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --color-primary-50: 240 249 255;
+  --color-primary-100: 224 242 254;
+  --color-primary-200: 186 230 253;
+  --color-primary-300: 125 211 252;
+  --color-primary-400: 56 189 248;
+  --color-primary-500: 14 165 233;
+  --color-primary-600: 2 132 199;
+  --color-primary-700: 3 105 161;
+  --color-primary-800: 7 89 133;
+  --color-primary-900: 12 74 110;
+  --color-primary-950: 8 47 73;
+  
+  /* Secondary Colors */
+  --color-secondary-50: 236 253 245;
+  --color-secondary-100: 209 250 229;
+  --color-secondary-200: 167 243 208;
+  --color-secondary-300: 110 231 183;
+  --color-secondary-400: 52 211 153;
+  --color-secondary-500: 16 185 129;
+  --color-secondary-600: 5 150 105;
+  --color-secondary-700: 4 120 87;
+  --color-secondary-800: 6 95 70;
+  --color-secondary-900: 6 78 59;
+  --color-secondary-950: 2 44 34;
+  
+  /* Accent Colors */
+  --color-accent-50: 250 245 255;
+  --color-accent-100: 243 232 255;
+  --color-accent-200: 233 213 255;
+  --color-accent-300: 216 180 254;
+  --color-accent-400: 196 181 253;
+  --color-accent-500: 168 85 247;
+  --color-accent-600: 147 51 234;
+  --color-accent-700: 126 34 206;
+  --color-accent-800: 107 33 168;
+  --color-accent-900: 88 28 135;
+  --color-accent-950: 59 7 100;
+  
+  /* Neutral Colors */
+  --color-neutral-50: 245 241 232;
+  --color-neutral-100: 235 229 213;
+  --color-neutral-200: 219 210 186;
+  --color-neutral-300: 195 181 148;
+  --color-neutral-400: 178 160 118;
+  --color-neutral-500: 156 136 89;
+  --color-neutral-600: 128 111 73;
+  --color-neutral-700: 101 88 58;
+  --color-neutral-800: 84 73 48;
+  --color-neutral-900: 71 62 41;
+  --color-neutral-950: 36 31 20;
+  
+  /* Status Colors */
+  --color-success-500: 34 197 94;
+  --color-warning-500: 234 179 8;
+  --color-error-500: 239 68 68;
 }
 
-.citation-item {
-  @apply my-3 p-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm flex gap-2 hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-neutral-50 via-primary-50/30 to-accent-50/20 text-neutral-900 font-sans antialiased;
+    background-attachment: fixed;
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display leading-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    background: linear-gradient(135deg, rgb(var(--color-primary-600)), rgb(var(--color-accent-600)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl font-medium;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl font-medium;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg font-medium;
+  }
+  
+  p, li, blockquote {
+    @apply leading-relaxed;
+  }
+  
+  * {
+    scroll-behavior: smooth;
+  }
 }
 
-.citation-number {
-  @apply text-primary-600 font-semibold flex-shrink-0;
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 focus:ring-primary-500 shadow-primary-500/25;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700 focus:ring-secondary-500 shadow-secondary-500/25;
+  }
+  
+  .btn-accent {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700 focus:ring-accent-500 shadow-accent-500/25;
+  }
+  
+  .btn-ghost {
+    @apply bg-white/70 backdrop-blur-md hover:bg-white/90 text-neutral-900 focus:ring-neutral-300 border border-white/20;
+  }
+  
+  .btn-outline-error {
+    @apply bg-red-50 border-2 border-red-200 text-red-600 hover:bg-red-100 hover:border-red-300 focus:ring-red-500;
+  }
+  
+  .card {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/90 hover:-translate-y-1;
+  }
+  
+  .card-glass {
+    @apply bg-white/60 backdrop-blur-xl rounded-2xl shadow-lg border border-white/30 p-6 transition-all duration-300 hover:bg-white/70;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-6 transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all duration-200;
+    font-size: 16px;
+  }
+  
+  .floating-element {
+    @apply fixed bottom-6 right-6 bg-gradient-to-r from-primary-500 to-accent-500 text-white p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 z-50;
+  }
+
+  /* Citation Styles */
+  .citation-link {
+    @apply text-primary-600 no-underline font-medium hover:underline hover:bg-primary-50 px-1 -mx-1 rounded transition-colors;
+  }
+
+  .citation-item {
+    @apply my-3 p-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm flex gap-2 hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
+  }
+
+  .citation-number {
+    @apply text-primary-600 font-semibold flex-shrink-0;
+  }
+
+  .citation-text {
+    @apply text-neutral-700 leading-relaxed;
+  }
+
+  .search-result {
+    @apply my-3;
+  }
+
+  .search-link {
+    @apply text-primary-600 no-underline font-medium inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
+  }
+
+  .external-link {
+    @apply opacity-50 transition-opacity;
+  }
+
+  .search-link:hover .external-link {
+    @apply opacity-75;
+  }
 }
 
-.citation-text {
-  @apply text-neutral-700 leading-relaxed hover:text-primary-600 transition-colors;
-}
-
-.search-result {
-  @apply my-3;
-}
-
-.search-link {
-  @apply text-primary-600 no-underline font-medium inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg hover:bg-neutral-100 hover:border-neutral-300 transition-colors;
-}
-
-.external-link {
-  @apply opacity-50 transition-opacity;
-}
-
-.search-link:hover .external-link {
-  @apply opacity-75;
+@layer utilities {
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
 }
