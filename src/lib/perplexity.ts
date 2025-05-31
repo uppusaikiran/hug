@@ -104,11 +104,13 @@ export class PerplexityClient {
       // Format citations with clickable links
       if (response.citations?.length) {
         response.citations.forEach((citation, index) => {
-          const citationId = `citation-${index + 1}`;
           // Add citation reference in text
-          formattedText = formattedText.replace(`[${index + 1}]`, `[${index + 1}](#${citationId})`);
+          formattedText = formattedText.replace(
+            `[${index + 1}]`, 
+            `<a href="#citation-${index + 1}" class="citation-link">[${index + 1}]</a>`
+          );
           // Add citation to list
-          citations.push(`<div id="${citationId}" class="citation-item">
+          citations.push(`<div id="citation-${index + 1}" class="citation-item">
             <span class="citation-number">[${index + 1}]</span>
             <span class="citation-text">${citation}</span>
           </div>`);
