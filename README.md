@@ -304,7 +304,7 @@ npm run android
 ## 📊 Project Structure
 
 ```
-mind-haven/
+huggy/
 ├── public/                 # Static assets and screenshots
 ├── src/
 │   ├── components/         # React components
@@ -443,15 +443,6 @@ We welcome contributions from developers, mental health professionals, and advoc
 
 ---
 
-## 🏆 Recognition & Awards
-
-- **World's Largest Hackathon**: Finalist in Voice AI Challenge
-- **Mental Health Innovation**: Recognition for accessible mental healthcare
-- **Accessibility Excellence**: Award for inclusive design practices
-- **Open Source Impact**: Community-driven mental health solution
-
----
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -509,10 +500,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-<div align="center">
-  <p><strong>huggy - Always Here, Always Caring</strong></p>
-  <p>Made with ❤️ for mental health and wellbeing</p>
-  
-  [![GitHub stars](https://img.shields.io/github/stars/yourusername/mind-haven?style=social)](https://github.com/yourusername/mind-haven/stargazers)
-  [![Twitter Follow](https://img.shields.io/twitter/follow/huggyai?style=social)](https://twitter.com/huggyai)
-</div>
