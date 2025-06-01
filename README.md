@@ -11,67 +11,80 @@
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC.svg)](https://tailwindcss.com/)
 </div>
 
+### [🎥 Live Demo](#) | [📖 Documentation](#getting-started) | [🚀 Try It Now](#)
+
+
 ---
 
-## 🌟 Overview
+## 🌟 Elevator Pitch
 
-huggy is a revolutionary AI-powered mental health companion that provides 24/7 empathetic support, crisis intervention, and personalized wellness guidance. Built with cutting-edge AI technology, huggy offers a safe space for users to explore their mental wellbeing through natural conversations and guided activities.
+> **Addressing the Mental Health Crisis with AI Innovation**
+> 
+> 💬 **huggy** is a revolutionary AI-powered mental health companion that provides **stigma-free 24/7 support** through video and voice conversations. In a world where **94 million Americans wait over a week for mental health support** and **8 out of 10 workers avoid help due to stigma**, huggy eliminates barriers with cutting-edge AI technology that delivers real human empathy when you need it most.
 
-### 🎯 Mission
-To democratize mental health support and make it accessible to everyone, everywhere, at any time. We aim to bridge the gap in mental healthcare by providing immediate, empathetic, and intelligent support through conversational AI.
+## 🎯 The Problem We're Solving
+
+- **📊 94 million Americans** wait over a week for mental health support
+- **🚫 8 out of 10 workers** avoid seeking help due to stigma  
+- **⏰ 24/7 need** but limited professional availability
+- **💰 Cost barriers** preventing access to care
+- **🗣️ Communication gaps** in traditional text-only solutions
+
+## 💡 Our Solution
+
+huggy revolutionizes mental healthcare by combining **advanced AI with human empathy** to provide:
+
+### 🎥 **Revolutionary Video Conversations**
+- Face-to-face AI support through Tavus AI integration
+- Real-time emotional analysis and personalized responses
+- Breaking the "text-only" barrier in digital mental health
+
+### 🎤 **Natural Voice Interactions** 
+- ElevenLabs-powered voice synthesis for warm, empathetic conversations
+- Hands-free support for accessibility and convenience
+- Emotion detection through voice pattern analysis
+
+### 🤖 **Intelligent AI Companion**
+- Perplexity AI for contextual, evidence-based responses
+- 24/7 availability with instant crisis detection
+- Personalized support adapting to individual needs
+
+### 🆘 **Crisis Support & Safety**
+- Real-time crisis detection algorithms
+- Immediate access to emergency resources
+- Collaborative safety planning and follow-up care
 
 ---
 
 ## 🚀 Key Features
 
-### 🤖 AI Companion Chat
-- **Voice & Text Conversations**: Natural interactions with empathetic AI
-- **Emotional Intelligence**: AI understands and responds to emotional context
-- **24/7 Availability**: Always ready to listen and provide support
-- **Personalized Responses**: Adapts to your communication style and needs
+<table>
+<tr>
+<td width="50%">
 
-### 🎥 Video Conversations
-- **Face-to-Face Support**: Interactive video sessions with AI wellness coach
-- **Real-time Engagement**: Natural conversation flow with visual feedback
-- **Personalized Experience**: AI adapts to your visual cues and expressions
+### 💬 **Core Capabilities**
+- 🤖 AI Companion Chat with emotional intelligence
+- 🎥 Face-to-face video conversations  
+- 🎤 Natural voice interactions
+- 🆘 24/7 crisis support and intervention
+- 📊 Mood tracking and progress analytics
+- 🧘 Guided wellness programs
 
-### 🆘 Crisis Support
-- **Immediate Intervention**: Real-time crisis detection and response
-- **Emergency Resources**: Quick access to crisis hotlines and professional help
-- **Safety Planning**: Collaborative safety plan development
-- **Follow-up Care**: Continuous support after crisis episodes
+</td>
+<td width="50%">
 
-### 🧘 Wellness Programs
-- **Guided Meditation**: Voice-guided mindfulness sessions
-- **Breathing Exercises**: Interactive breathing techniques with visual guidance
-- **Mindfulness Activities**: Daily practices for mental wellbeing
-- **Sleep Support**: Calming bedtime stories and sleep hygiene tips
+### 🎮 **Engagement Features**
+- 🎯 Gamified wellness challenges
+- 🌐 Anonymous community support
+- 👨‍⚕️ Professional resource directory
+- 📚 Comprehensive mental health library
+- 🔒 Privacy-first design
+- 🌍 Multilingual accessibility
 
-### 📊 Mood Tracking
-- **Daily Check-ins**: Monitor emotional wellbeing patterns
-- **Progress Insights**: Visual analytics of your mental health journey
-- **Trend Analysis**: Identify patterns and triggers
-- **Goal Setting**: Set and track personal wellness objectives
+</td>
+</tr>
+</table>
 
-### 🎮 Gamified Challenges
-- **Wellness Quests**: Engaging self-care activities
-- **Progress Rewards**: Achievement system for motivation
-- **Community Challenges**: Connect with others on similar journeys
-- **Streak Tracking**: Build healthy habits through consistency
-
-### 🌐 Community Support
-- **Peer Connections**: Engage with others in a supportive environment
-- **Shared Experiences**: Anonymous sharing of progress and insights
-- **Group Activities**: Participate in community wellness challenges
-- **Success Stories**: Inspirational journeys from other users
-
-### 👨‍⚕️ Professional Resources
-- **Therapist Directory**: Find licensed mental health professionals
-- **Telehealth Integration**: Connect with online therapy services
-- **Resource Library**: Comprehensive mental health information
-- **Appointment Scheduling**: Seamless booking with healthcare providers
-
----
 
 ## 📱 Application Screenshots & Features
 
@@ -420,39 +433,6 @@ huggy/
 - [Deployment Guide](docs/DEPLOYMENT.md)
 - [Testing Guide](docs/TESTING.md)
 
----
-
-## 🤝 Contributing
-
-We welcome contributions from developers, mental health professionals, and advocates! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for detailed information on:
-
-- Code of conduct
-- Development setup
-- Pull request process
-- Issue reporting
-- Feature requests
-- Documentation improvements
-
-### Ways to Contribute
-- **Code**: Bug fixes, new features, performance improvements
-- **Documentation**: User guides, API docs, tutorials
-- **Design**: UI/UX improvements, accessibility enhancements
-- **Testing**: Bug reports, user testing, quality assurance
-- **Content**: Mental health resources, educational materials
-- **Translation**: Multilingual support and localization
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Third-Party Licenses
-- React: MIT License
-- Supabase: Apache 2.0 License
-- Tailwind CSS: MIT License
-- ElevenLabs: Commercial API License
-- Tavus: Commercial API License
 
 ---
 
@@ -464,39 +444,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tavus**: Video AI capabilities
 - **Supabase**: Backend infrastructure
 - **Netlify**: Deployment and hosting
-
-### Mental Health Experts
-- Clinical psychologists who provided therapeutic guidance
-- Crisis intervention specialists for emergency protocols
-- Accessibility experts for inclusive design
-- Community advocates for user feedback
-
-### Open Source Community
-- Contributors who have improved the codebase
-- Translators who have enabled multilingual support
-- Beta testers who provided valuable feedback
-- Documentation contributors
-
----
-
-## 📞 Support & Contact
-
-### For Users
-- **Crisis Support**: If you're in immediate danger, call emergency services
-- **Technical Support**: [support@huggy.ai](mailto:support@huggy.ai)
-- **Feedback**: [feedback@huggy.ai](mailto:feedback@huggy.ai)
-- **General Inquiries**: [hello@huggy.ai](mailto:hello@huggy.ai)
-
-### For Developers
-- **GitHub Issues**: Report bugs and request features
-- **Discord Community**: Join our developer community
-- **Documentation**: Comprehensive guides and API references
-- **Contributing**: See our contributing guidelines
-
-### Crisis Resources
-- **National Suicide Prevention Lifeline**: 988
-- **Crisis Text Line**: Text HOME to 741741
-- **International**: See our [crisis resources page](docs/CRISIS_RESOURCES.md)
-
----
-
