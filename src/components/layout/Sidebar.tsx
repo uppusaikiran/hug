@@ -41,7 +41,9 @@ const Sidebar = () => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-primary-100 hover:bg-primary-50 transition-colors"
+        className="md:hidden fixed top-4 left-4 z-[60] p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl border-2 border-primary-200 hover:bg-primary-50 transition-all duration-200 hover:scale-105 active:scale-95"
+        style={{ touchAction: 'manipulation' }}
+        aria-label="Toggle mobile menu"
       >
         <motion.div
           animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
@@ -59,14 +61,14 @@ const Sidebar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsMobileMenuOpen(false)}
-            className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 bg-black/50 z-[55] backdrop-blur-sm"
           />
         )}
       </AnimatePresence>
 
       {/* Desktop Sidebar */}
       <motion.aside 
-        className="hidden md:flex flex-col h-full"
+        className="hidden md:flex flex-col h-full w-64 bg-gradient-to-br from-white/80 via-primary-50/80 to-accent-50/80 backdrop-blur-md border-r border-white/20 shadow-lg relative z-10"
         initial={{ x: -50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
@@ -124,7 +126,7 @@ const Sidebar = () => {
             animate={{ x: 0 }}
             exit={{ x: -300 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="md:hidden fixed left-0 top-0 bottom-0 w-72 bg-gradient-to-br from-white/90 to-primary-50/90 backdrop-blur-md border-r border-white/20 z-50 shadow-xl"
+            className="md:hidden fixed left-0 top-0 bottom-0 w-72 bg-gradient-to-br from-white/90 to-primary-50/90 backdrop-blur-md border-r border-white/20 z-[60] shadow-xl"
           >
             <div className="p-4 border-b border-white/20 mt-16">
               <div className="flex items-center gap-2">

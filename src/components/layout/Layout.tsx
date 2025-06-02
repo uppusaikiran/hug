@@ -29,10 +29,8 @@ const Layout = () => {
         />
       </div>
       
-      {/* Sidebar with gradient background */}
-      <div className="hidden md:block w-64 bg-gradient-to-br from-white/80 via-primary-50/80 to-accent-50/80 backdrop-blur-md border-r border-white/20 shadow-lg relative z-10">
-        <Sidebar />
-      </div>
+      {/* Sidebar - renders mobile button on mobile, full sidebar on desktop */}
+      <Sidebar />
 
       <div className="flex-1 flex flex-col overflow-hidden relative z-10">
         {/* Navbar with gradient background */}
