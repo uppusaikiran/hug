@@ -247,17 +247,9 @@ export const GentleWave = ({ className = "", height = 60 }: GentleWaveProps) => 
       viewBox="0 0 1200 120"
       preserveAspectRatio="none"
     >
-      <motion.path
+      <path
         d="M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z"
         fill="rgba(236, 72, 153, 0.1)"
-        animate={{
-          d: [
-            "M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z",
-            "M0,60 C300,20 900,100 1200,60 L1200,120 L0,120 Z",
-            "M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z"
-          ]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
     </motion.svg>
   </div>

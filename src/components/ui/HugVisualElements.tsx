@@ -29,29 +29,13 @@ export const HugWave = ({ className = "", size = "medium" }: HugWaveProps) => {
         style={{ backgroundSize: '200% 200%' }}
       />
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 120">
-        <motion.path
+        <path
           d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
           fill="rgba(236, 72, 153, 0.1)"
-          animate={{
-            d: [
-              "M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z",
-              "M0,60 C300,0 900,120 1200,60 L1200,120 L0,120 Z",
-              "M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"
-            ]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.path
+        <path
           d="M0,80 C300,40 900,160 1200,80 L1200,120 L0,120 Z"
           fill="rgba(147, 51, 234, 0.1)"
-          animate={{
-            d: [
-              "M0,80 C300,40 900,160 1200,80 L1200,120 L0,120 Z",
-              "M0,80 C300,160 900,40 1200,80 L1200,120 L0,120 Z",
-              "M0,80 C300,40 900,160 1200,80 L1200,120 L0,120 Z"
-            ]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
       </svg>
     </div>
@@ -451,17 +435,9 @@ export const CareWave = ({ className = "", intensity = 'medium' }: CareWaveProps
         style={{ backgroundSize: '200% 200%', opacity: config.opacity }}
       />
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 120">
-        <motion.path
+        <path
           d="M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z"
           fill="rgba(236, 72, 153, 0.15)"
-          animate={{
-            d: [
-              "M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z",
-              "M0,60 C300,20 900,100 1200,60 L1200,120 L0,120 Z",
-              "M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z"
-            ]
-          }}
-          transition={{ duration: config.duration, repeat: Infinity, ease: "easeInOut" }}
         />
       </svg>
     </div>

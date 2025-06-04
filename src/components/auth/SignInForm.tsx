@@ -111,7 +111,7 @@ export default function SignInForm() {
                   <Heart className="h-2 w-2 text-pink-400 absolute -top-0.5 -right-0.5 animate-pulse" />
                 </div>
                 <h3 className="text-sm font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  WORLD'S LARGEST HACKATHON JUDGE
+                  FOR JUDGES & EVALUATORS ONLY
                 </h3>
                 <div className="relative">
                   <Star className="h-4 w-4 text-yellow-400 animate-pulse" />
@@ -120,7 +120,7 @@ export default function SignInForm() {
               </div>
               <div className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full text-xs font-bold shadow-md">
                 <Zap className="h-3 w-3" />
-                FAST TRACK ACCESS • $1M+ PRIZES 🤗
+                QUICK ACCESS FOR JUDGING 🤗
                 <Zap className="h-3 w-3" />
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function SignInForm() {
               <div className="absolute top-0 right-0 w-8 h-8 bg-pink-400/10 rounded-full blur-md"></div>
               <div className="flex items-center justify-between relative z-10">
                 <div className="flex-1">
-                  <p className="text-xs text-gray-300 mb-1">TEST CREDENTIALS 💝</p>
+                  <p className="text-xs text-gray-300 mb-1">JUDGE QUICK ACCESS CREDENTIALS 💝</p>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-mono font-bold text-green-400">testing@devpost.com</span>
                     <div className="flex gap-1">
@@ -139,12 +139,12 @@ export default function SignInForm() {
                       <div className="w-1 h-1 bg-pink-400 rounded-full animate-ping delay-75"></div>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-400">Same for email & password 🤲</p>
+                  <p className="text-xs text-gray-400">Same email & password for quick judging access 🤲</p>
                 </div>
                 <button
                   onClick={copyTestingCredentials}
                   className="p-1 hover:bg-gray-700 rounded transition-colors ml-2 relative group"
-                  title="Copy with care"
+                  title="Copy judge credentials"
                 >
                   <Copy className="h-4 w-4 text-gray-300 group-hover:text-pink-300 transition-colors" />
                   <Heart className="h-1 w-1 text-pink-400 absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -166,12 +166,12 @@ export default function SignInForm() {
               {/* Caring glow on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-pink-300/20 to-rose-300/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <Zap className="h-4 w-4 relative z-10" />
-              <span className="relative z-10">AUTO-FILL WITH CARE 🤗</span>
+              <span className="relative z-10">INSTANT JUDGE ACCESS 🤗</span>
             </button>
             
             <p className="text-xs text-center text-gray-500 mt-2 flex items-center justify-center gap-1">
               <Heart className="h-3 w-3 text-pink-400 animate-pulse" />
-              80K+ participants • Regular signup available below
+              For competition judges • Regular signup available below
               <Heart className="h-3 w-3 text-rose-400 animate-pulse delay-500" />
             </p>
           </div>
