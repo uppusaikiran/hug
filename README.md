@@ -91,22 +91,14 @@ huggy revolutionizes mental healthcare by combining **advanced AI with human emp
 ### 🏠 Homepage - Welcome Experience
 <img src="public/homepage.png" alt="Homepage" width="800">
 
-The welcoming homepage introduces users to huggy's capabilities with a clean, calming design. Features include:
-- **Warm Welcome Message**: Inviting introduction to mental health support
-- **Feature Overview**: Clear explanation of available services
-- **Easy Navigation**: Simple access to sign up or sign in
-- **Accessibility**: Designed for users in various emotional states
+The welcoming homepage introduces users to huggy's capabilities with a clean, calming design
 
 ---
 
 ### 🔐 Authentication - Secure Sign In
 <img src="public/singin_page.png" alt="Sign In Page" width="800">
 
-Secure and user-friendly authentication system:
-- **Clean Interface**: Minimalist design reduces cognitive load
-- **Social Login Options**: Quick access through popular platforms
-- **Privacy Assurance**: Clear data protection commitments
-- **Accessibility Features**: Screen reader compatible and keyboard navigation
+Secure and user-friendly authentication system
 
 ---
 
@@ -125,13 +117,7 @@ The comprehensive dashboard provides an overview of your mental health journey:
 ### 💬 AI Conversation - Text Chat Support
 <img src="public/chat.png" alt="AI Chat Interface" width="800">
 
-The heart of huggy - intelligent, empathetic conversation:
-- **Natural Language Processing**: AI understands context and emotions
-- **Therapeutic Techniques**: Incorporates CBT, DBT, and mindfulness approaches
-- **Real-time Responses**: Immediate support when you need it most
-- **Conversation Memory**: AI remembers your preferences and progress
-- **Crisis Detection**: Automatic identification of distress signals
-- **Resource Suggestions**: Contextual recommendations for additional help
+The heart of huggy - intelligent, empathetic conversation
 
 ---
 
@@ -142,8 +128,6 @@ Experience natural, spoken conversations with your AI companion:
 - **ElevenLabs Integration**: High-quality, natural voice synthesis
 - **Emotion Recognition**: AI detects emotional state through voice patterns
 - **Hands-free Support**: Perfect for when you need support while on the go
-- **Voice Customization**: Choose from different AI voice personalities
-- **Noise Cancellation**: Clear communication in any environment
 
 ---
 
@@ -153,34 +137,20 @@ Experience natural, spoken conversations with your AI companion:
 Revolutionary video interaction with AI wellness coach:
 - **Tavus AI Integration**: Realistic video conversations with AI
 - **Visual Emotional Analysis**: AI reads facial expressions and body language
-- **Interactive Sessions**: Guided exercises and real-time feedback
-- **Personalized Coaching**: Tailored wellness plans based on visual cues
-- **Privacy Protected**: Secure video processing with data protection
 
 ---
 
 ### 👩‍⚕️ AI Wellness Coach - Personalized Guidance
 <img src="public/Wellness_coach.png" alt="Wellness Coach" width="800">
 
-Meet your personal AI wellness coach:
-- **Expert Knowledge**: Trained on evidence-based therapeutic practices
-- **Personalized Plans**: Custom wellness strategies for your unique needs
-- **Progress Tracking**: Monitor your journey with detailed analytics
-- **Goal Setting**: Collaborative objective setting and achievement tracking
-- **Adaptive Learning**: AI improves recommendations based on your responses
+Meet your personal AI wellness coach
 
 ---
 
 ### 🧘 Meditation & Mindfulness - Guided Practices
 <img src="public/meditation.png" alt="Meditation Interface" width="800">
 
-Comprehensive mindfulness and meditation features:
-- **Guided Sessions**: Voice-led meditation with various techniques
-- **Breathing Exercises**: Interactive visual guides for deep breathing
-- **Progressive Muscle Relaxation**: Step-by-step tension release
-- **Mindfulness Reminders**: Personalized notifications for mindful moments
-- **Session Library**: Extensive collection of meditation practices
-- **Custom Sessions**: Personalized meditation based on your needs
+Comprehensive mindfulness and meditation features
 
 ---
 
@@ -194,22 +164,13 @@ Engaging wellness challenges to build healthy habits:
 - **Social Connection Challenge**: Encourage healthy relationships
 - **Sleep Hygiene Heroes**: Improve sleep habits through gamification
 - **Progress Tracking**: Visual progress indicators and achievement badges
-- **Community Features**: Share achievements and support others
 
 ---
 
 ### 📚 Mental Health Resources - Comprehensive Support
 <img src="public/resources.png" alt="Resources Page" width="800">
 
-Extensive library of mental health resources and support:
-- **Crisis Hotlines**: Immediate access to emergency mental health support
-- **Therapist Directory**: Find licensed professionals in your area
-- **Educational Content**: Evidence-based mental health information
-- **Support Groups**: Connect with local and online communities
-- **Self-Help Tools**: Interactive worksheets and assessment tools
-- **Emergency Contacts**: Quick access to emergency services
-- **Telehealth Options**: Connect with online therapy platforms
-
+Extensive library of mental health resources and support
 ---
 
 ## 🛠️ Technical Architecture
@@ -257,7 +218,7 @@ Extensive library of mental health resources and support:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/mind-haven.git
+git clone https://github.com/uppusaikiran/hug.git
 cd mind-haven
 ```
 
@@ -370,47 +331,7 @@ huggy/
 
 ---
 
-## 🔒 Privacy & Security
 
-### Data Protection
-- **End-to-End Encryption**: All conversations encrypted in transit and at rest
-- **HIPAA Compliance**: Healthcare data protection standards
-- **User Control**: Complete data ownership and deletion rights
-- **Anonymous Analytics**: Aggregate insights without personal identification
-- **Secure Storage**: Cloud-based security with regular audits
-
-### Privacy Features
-- **Opt-in Data Sharing**: Users control what data is shared
-- **Anonymous Mode**: Use the app without creating an account
-- **Data Export**: Download your complete data at any time
-- **Right to Deletion**: Complete data removal upon request
-- **Transparency**: Clear privacy policy and data usage explanations
-
----
-
-## 🌍 Accessibility & Inclusivity
-
-### Universal Design
-- **Screen Reader Support**: Full compatibility with assistive technologies
-- **Keyboard Navigation**: Complete app functionality without a mouse
-- **High Contrast Mode**: Enhanced visibility for users with vision impairments
-- **Large Text Options**: Scalable font sizes for better readability
-- **Voice Commands**: Navigate the app using voice input
-
-### Multilingual Support
-- **Language Options**: English, Spanish, French, German, Mandarin
-- **Cultural Sensitivity**: Culturally appropriate responses and recommendations
-- **Localized Resources**: Region-specific mental health resources and hotlines
-- **Translation Quality**: Professional-grade translations for accuracy
-
-### Inclusive Features
-- **Diverse Representation**: Inclusive imagery and language throughout
-- **LGBTQ+ Support**: Specialized resources and understanding
-- **Neurodiversity**: Support for ADHD, autism, and other neurodivergent conditions
-- **Trauma-Informed**: Approaches designed for trauma survivors
-- **Crisis-Specific**: Specialized support for various crisis types
-
----
 
 ## 📚 Documentation
 
