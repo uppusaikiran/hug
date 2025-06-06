@@ -5,13 +5,17 @@
   
   <h3>Your 24/7 AI Mental Health Companion - Always Here, Always Caring</h3>
   
+  <h2>🌐 Live at <a href="https://huggycares.me">huggycares.me</a></h2>
+  
+  [![Built with Bolt.new](https://img.shields.io/badge/Built_with-Bolt.new-8A2BE2.svg)](https://bolt.new)
+  [![Live Demo](https://img.shields.io/badge/Live_Demo-huggycares.me-success.svg)](https://huggycares.me)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-blue.svg)](https://www.typescriptlang.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC.svg)](https://tailwindcss.com/)
 </div>
 
-### [🎥 Live Demo](#) | [📖 Documentation](#getting-started) | [🚀 Try It Now](#)
+### [🎥 Video Demo](https://www.youtube.com/watch?v=NbeCHPAYc30) | [🌐 Live App](https://huggycares.me) | [📖 Documentation](#getting-started)
 
 
 ---
@@ -20,7 +24,46 @@
 
 > **Addressing the Mental Health Crisis with AI Innovation**
 > 
-> 💬 **huggy** is a revolutionary AI-powered mental health companion that provides **stigma-free 24/7 support** through video and voice conversations. In a world where **94 million Americans wait over a week for mental health support** and **8 out of 10 workers avoid help due to stigma**, huggy eliminates barriers with cutting-edge AI technology that delivers real human empathy when you need it most.
+> 💬 **huggy** is a revolutionary AI-powered mental health companion live at **[huggycares.me](https://huggycares.me)** that provides **stigma-free 24/7 support** through video and voice conversations. In a world where **94 million Americans wait over a week for mental health support** and **8 out of 10 workers avoid help due to stigma**, huggy eliminates barriers with cutting-edge AI technology that delivers real human empathy when you need it most.
+> 
+> 🚀 **Experience it yourself**: Visit **[huggycares.me](https://huggycares.me)** to try the future of mental health support.
+
+---
+
+## 🎥 **Live Demo Video**
+
+**Watch huggy in action! See our revolutionary AI mental health companion featuring video chat, voice conversations, and 24/7 support:**
+
+[![huggy Live Demo](https://img.youtube.com/vi/NbeCHPAYc30/maxresdefault.jpg)](https://www.youtube.com/watch?v=NbeCHPAYc30)
+
+**[▶️ Watch Full Demo on YouTube](https://www.youtube.com/watch?v=NbeCHPAYc30)**
+
+*Experience the future of mental health support with face-to-face AI conversations, natural voice interactions, and compassionate 24/7 care at [huggycares.me](https://huggycares.me)*
+
+---
+
+## 🏆 **World's Largest Hackathon 2025 Submission**
+
+**Built with Bolt.new** for the [World's Largest Hackathon](https://worldslargesthackathon.devpost.com/) - competing in multiple challenge categories:
+
+### 🎯 **Target Challenges:**
+- **🎥 Conversational AI Video Challenge** - Revolutionary Tavus AI video therapy sessions
+- **🎤 Voice AI Challenge** - ElevenLabs-powered natural voice conversations  
+- **🌐 Custom Domain Challenge** - Creative **huggycares.me** domain perfectly capturing our mission
+- **🚀 Deploy Challenge** - Full-stack deployment showcasing production-ready mental health platform
+
+### 📊 **Impact & Innovation:**
+- **Real-world Problem**: Addressing the mental health crisis affecting 94 million Americans
+- **Technical Excellence**: Cutting-edge AI integration (Tavus, ElevenLabs, Perplexity)
+- **User-Centered Design**: Accessible, stigma-free 24/7 mental health support
+- **Scalable Solution**: Built for millions of users with Supabase backend
+
+### 🎬 **Submission Links:**
+- **🎥 Demo Video**: [YouTube](https://www.youtube.com/watch?v=NbeCHPAYc30) *(3-minute demonstration)*
+- **🌐 Live Application**: [huggycares.me](https://huggycares.me) *(fully functional)*
+- **⚡ Bolt.new Project**: [bolt.new/~/github-4qmnki8w](https://bolt.new/~/github-4qmnki8w) *(development environment)*
+
+---
 
 ## 🎯 The Problem We're Solving
 
@@ -88,17 +131,31 @@ huggy revolutionizes mental healthcare by combining **advanced AI with human emp
 
 ## 📱 Application Screenshots & Features
 
-### 🏠 Homepage - Welcome Experience
-<img src="public/homepage.png" alt="Homepage" width="800">
+### 🎥 **Featured: Revolutionary Video Wellness Coach** ⭐
+<img src="public/video_call.png" alt="Video Call Interface" width="800">
 
-The welcoming homepage introduces users to huggy's capabilities with a clean, calming design
+**🚀 The Game-Changer in AI Mental Health Support**
+
+Our flagship video chat feature represents a breakthrough in digital mental health care:
+
+- **🎭 Tavus AI Integration**: Experience realistic, face-to-face conversations with an AI wellness coach
+- **🧠 Advanced Emotional Intelligence**: AI reads facial expressions, body language, and micro-expressions
+- **💫 Human-like Interaction**: Breaking the barrier between digital and human support
+- **🔍 Real-time Analysis**: Continuous assessment of emotional state through visual cues
+- **🎯 Personalized Response**: Video interactions adapt in real-time to your emotional needs
+- **🌟 Unprecedented Accessibility**: 24/7 face-to-face support without scheduling constraints
+
+**Why Video Matters**: Unlike text or voice-only solutions, our video chat provides the full spectrum of human communication, making AI support feel genuinely personal and effective.
 
 ---
 
-### 🔐 Authentication - Secure Sign In
-<img src="public/singin_page.png" alt="Sign In Page" width="800">
+### 🎤 Voice Conversations - Natural Audio Interaction
+<img src="public/voice_call.png" alt="Voice Call Interface" width="800">
 
-Secure and user-friendly authentication system
+Experience natural, spoken conversations with your AI companion:
+- **ElevenLabs Integration**: High-quality, natural voice synthesis
+- **Emotion Recognition**: AI detects emotional state through voice patterns
+- **Hands-free Support**: Perfect for when you need support while on the go
 
 ---
 
@@ -118,25 +175,6 @@ The comprehensive dashboard provides an overview of your mental health journey:
 <img src="public/chat.png" alt="AI Chat Interface" width="800">
 
 The heart of huggy - intelligent, empathetic conversation
-
----
-
-### 🎤 Voice Conversations - Natural Audio Interaction
-<img src="public/voice_call.png" alt="Voice Call Interface" width="800">
-
-Experience natural, spoken conversations with your AI companion:
-- **ElevenLabs Integration**: High-quality, natural voice synthesis
-- **Emotion Recognition**: AI detects emotional state through voice patterns
-- **Hands-free Support**: Perfect for when you need support while on the go
-
----
-
-### 🎥 Video Wellness Coach - Face-to-Face Support
-<img src="public/video_call.png" alt="Video Call Interface" width="800">
-
-Revolutionary video interaction with AI wellness coach:
-- **Tavus AI Integration**: Realistic video conversations with AI
-- **Visual Emotional Analysis**: AI reads facial expressions and body language
 
 ---
 
@@ -171,6 +209,23 @@ Engaging wellness challenges to build healthy habits:
 <img src="public/resources.png" alt="Resources Page" width="800">
 
 Extensive library of mental health resources and support
+
+---
+
+## 📸 Additional App Screenshots
+
+### 🏠 Homepage - Welcome Experience
+<img src="public/homepage.png" alt="Homepage" width="800">
+
+The welcoming homepage introduces users to huggy's capabilities with a clean, calming design
+
+---
+
+### 🔐 Authentication - Secure Sign In
+<img src="public/singin_page.png" alt="Sign In Page" width="800">
+
+Secure and user-friendly authentication system with privacy-focused design
+
 ---
 
 ## 🛠️ Technical Architecture
@@ -183,11 +238,11 @@ Extensive library of mental health resources and support
 - **React Router**: Client-side routing for seamless navigation
 - **Vite**: Fast build tool and development server
 
-### **AI & Voice Technologies**
-- **Perplexity API**: Advanced natural language processing
-- **ElevenLabs**: High-quality voice synthesis and recognition
-- **Tavus AI**: Realistic video conversation capabilities
-- **OpenAI**: Supplementary AI processing for complex tasks
+### **AI & Voice Technologies** *(Hackathon Sponsor Integrations)*
+- **🎥 Tavus AI**: Revolutionary video conversation capabilities - *Featured in Conversational AI Video Challenge*
+- **🎤 ElevenLabs**: High-quality voice synthesis and recognition - *Featured in Voice AI Challenge*
+- **🧠 Perplexity API**: Advanced natural language processing and contextual responses
+- **🤖 OpenAI**: Supplementary AI processing for complex therapeutic interactions
 
 ### **Backend & Database**
 - **Supabase**: PostgreSQL database with real-time capabilities
